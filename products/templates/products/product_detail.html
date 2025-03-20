@@ -14,6 +14,14 @@
             <p><strong>Precio:</strong> ${{ product.price }}</p>
             <p><strong>Categoría:</strong> {{ product.category }}</p>
 
+            <form method="POST" action="{% url 'add_to_cart' product.id %}">
+                {% csrf_token %}
+                <label for="quantity">Cantidad:</label>
+                <input type="number" name="quantity" id="quantity" value="1" min="1" max="{{ product.stock }}">
+                <button type="submit">Añadir al carrito</button>
+            </form>
+            <a href="{% url 'cart_detail' %}">Ver Carrito</a>
+
             <h3>Reseñas:</h3>
             {% if reviews %}
                 {% for review in reviews %}
