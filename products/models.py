@@ -19,7 +19,7 @@ class Product(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def average_rating(self):
-        avg = self.reviews.aggregate(Avg('rating'))['reviews__rating']
+        avg = self.reviews.aggregate(avg_rating=Avg('rating'))['avg_rating']
         return round(avg, 1) if avg else 0
 
     def __str__(self):
