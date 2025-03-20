@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.conf import settings
+from django.db.models import Avg
 # Create your models here.
 
 class Category(models.Model):
@@ -17,5 +18,19 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name="products")
     date_added = models.DateTimeField(auto_now_add=True)
 
+    def average_rating(self):
+        avg = self.reviews.aggregate(Avg('rating'))['reviews__rating']
+        return round(avg, 1) if avg else 0
+
     def __str__(self):
         return self.name
+
+class Review(models.Model):
+    product = models.ForeignKey('products.Product', on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    rating = models.IntegerField(choices=[(i, i) for i in range(1,6)])
+    comment = models.TextField(null = True, blank= True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Review by {self.user.username} - {self.rating} Stars"

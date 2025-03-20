@@ -12,6 +12,7 @@
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ product.name }}</h5>
+                    <p>Calificación promedio: {{ product.average_rating|default:0|floatformat:1 }} ⭐</p>
                     <p class="card-text"><strong>Precio:</strong> ${{ product.price }}</p>
                     <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">Ver detalles</a>
                 </div>
