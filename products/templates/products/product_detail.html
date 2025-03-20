@@ -1,0 +1,19 @@
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+        {% else %}
+            <img src="/media/products/default.jpg" alt="Imagen no disponible" class="product-image">
+        {% endif %}
+        <div class="card-body">
+            <h2>{{ product.name }}</h2>
+            <p><strong>Descripción:</strong> {{ product.description }}</p>
+            <p><strong>Precio:</strong> ${{ product.price }}</p>
+            <p><strong>Categoría:</strong> {{ product.category }}</p>
+            <p><strong>Fecha de agregado:</strong> {{ product.date_added }}</p>
+            <a href="{% url 'product_list' %}" class="btn btn-secondary">Volver</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
