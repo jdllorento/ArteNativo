@@ -1,6 +1,18 @@
+{% extends 'products/base.html' %}
+
 {% block content %}
 <div class="container mt-5">
-    <h2 class="mb-4">Lista de Productos</h2>
+    <h2>
+        {% if user.is_authenticated %}
+            {% if user.is_staff %}
+                ¡Bienvenido, administrador {{ user.username }}! 👑
+            {% else %}
+                ¡Hola, {{ user.username }}!
+            {% endif %}
+        {% else %}
+            ¡Bienvenido a nuestra tienda! 🛍️
+        {% endif %}
+    </h2>
     <div class="row">
         {% for product in products %}
         <div class="col-md-4 mb-4">
@@ -15,6 +27,15 @@
                     <p>Calificación promedio: {{ product.average_rating|default:0|floatformat:1 }} ⭐</p>
                     <p class="card-text"><strong>Precio:</strong> ${{ product.price }}</p>
                     <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">Ver detalles</a>
+
+                    {% if user.is_authenticated and user.is_staff %}
+                        <p>
+                            Stock disponible: 
+                                <span style="color: {% if product.stock <= 5 %}red{% else %}black{% endif %}; font-weight: bold;">
+                                    {{ product.stock }}
+                                </span>
+                        </p>
+                    {% endif %}
                 </div>
             </div>
         </div>
