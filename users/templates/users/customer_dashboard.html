@@ -1,3 +1,6 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,6 +11,8 @@
 <body>
     <h2>Bienvenido, Cliente</h2>
     <p>Puedes ver productos y realizar compras.</p>
-    <a href="{% url 'logout' %}">Cerrar sesión</a>
+    <a href="{% url 'logout' %}" class = "btn btn-secondary">Cerrar sesión</a>
+    <a href="{% url 'product_list' %}" class = "btn btn-secondary">Home</a>
 </body>
 </html>
+{% endblock %}
