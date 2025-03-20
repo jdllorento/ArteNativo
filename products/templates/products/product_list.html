@@ -14,6 +14,25 @@
         {% endif %}
     </h2>
     <div class="row">
+        <form method="GET" action="{% url 'product_list' %}">
+            <input type="hidden" name="category" value="{{ selected_category }}">
+            <button type="submit" name="order" value="rating" class="btn btn-primary">Ordenar por mejor calificación</button>
+        </form>
+
+        <form method="GET" action="{% url 'product_list' %}">
+            <label for="category">Filtrar por categoría:</label>
+            <select name="category" id="category" onchange="this.form.submit()">
+                <option value="">Todas</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}" {% if category.id|stringformat:"s" == selected_category %}selected{% endif %}>
+                        {{ category.name }}
+                    </option>
+                {% empty %}
+                    <option disabled>No hay categorías disponibles</option>
+                {% endfor %}
+            </select>
+        </form>
+
         {% for product in products %}
         <div class="col-md-4 mb-4">
             <div class="card">
