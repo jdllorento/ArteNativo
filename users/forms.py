@@ -14,7 +14,6 @@ DOCUMENT_TYPES = [
 class BasicRegistrationForm(UserCreationForm):
     class Meta:
         model = User
-        # Se requieren solo username y password
         fields = ['username', 'password1', 'password2']
 
 
@@ -22,7 +21,6 @@ User = get_user_model()
 
 
 class FullRegistrationForm(forms.ModelForm):
-    # Hacer que el email sea obligatorio
     email = forms.EmailField(required=True)
 
     class Meta:
