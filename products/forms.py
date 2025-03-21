@@ -7,7 +7,6 @@ class ReviewForm(forms.ModelForm):
         model = Review
         fields = ['rating', 'comment']
         widgets = {
-            # Dropdown de 1 a 5
             'rating': forms.Select(choices=[(i, i) for i in range(1, 6)]),
             'comment': forms.Textarea(attrs={'rows': 3}),
         }

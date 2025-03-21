@@ -51,14 +51,14 @@ def basic_register(request):
 
 @login_required
 def full_register(request):
-    user = request.user  # Usuario autenticado
+    user = request.user
 
     if request.method == 'POST':
         form = FullRegistrationForm(
-            request.POST, instance=user)  # Usar usuario actual
+            request.POST, instance=user)
         if form.is_valid():
-            form.save()  # Guardar la actualización
-            return redirect('dashboard')  # Redirigir tras completar
+            form.save()
+            return redirect('dashboard')
     else:
         form = FullRegistrationForm(instance=user)
 
