@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Avg
-from .models import Product, Review, Category
+from .models import Product, Category
 from django.contrib.auth.decorators import login_required
 from .forms import ReviewForm
 # Create your views here.
@@ -23,7 +23,8 @@ def product_list(request):
 def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     reviews = product.reviews.all()
-    return render(request, 'products/product_detail.html', {'product': product, 'reviews':reviews})
+    average_rating=Avg('reviews__rating')
+    return render(request, 'products/product_detail.html', {'product': product, 'reviews':reviews, 'average_rating':average_rating})
 
 @login_required
 def add_review(request, product_id):

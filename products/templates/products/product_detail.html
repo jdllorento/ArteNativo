@@ -10,6 +10,7 @@
         {% endif %}
         <div class="card-body">
             <h2>{{ product.name }}</h2>
+            <p>Calificación promedio: {{ product.average_rating|default:0|floatformat:1 }} ⭐</p>
             <p><strong>Descripción:</strong> {{ product.description }}</p>
             <p><strong>Precio:</strong> ${{ product.price }}</p>
             <p><strong>Categoría:</strong> {{ product.category }}</p>
@@ -18,9 +19,9 @@
                 {% csrf_token %}
                 <label for="quantity">Cantidad:</label>
                 <input type="number" name="quantity" id="quantity" value="1" min="1" max="{{ product.stock }}">
-                <button type="submit">Añadir al carrito</button>
+                <button type="submit" class="btn btn-primary">Añadir al carrito</button>
             </form>
-            <a href="{% url 'cart_detail' %}">Ver Carrito</a>
+            <a href="{% url 'cart_detail' %}" class="btn btn-secondary">Ver Carrito</a>
 
             <h3>Reseñas:</h3>
             {% if reviews %}
