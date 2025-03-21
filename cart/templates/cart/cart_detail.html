@@ -13,5 +13,6 @@
         <p>Tu carrito está vacío.</p>
     {% endfor %}
 </ul>
-<p><strong>Total:</strong> ${{ cart.total_price }}</p>
+<p><strong>Subtotal:</strong> ${{ cart.total_price }}</p>
+<a class="btn-btn primary" href="{% url 'checkout' %}">Pagar</a>
 {% endblock %}

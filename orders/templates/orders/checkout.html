@@ -1,0 +1,16 @@
+{% extends 'orders/base.html' %}
+
+{% block content %}
+  <h2>Checkout</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    <label for="payment_method">Selecciona método de pago:</label>
+    <select name="payment_method" id="payment_method" required>
+      <option value="card">Tarjeta</option>
+      <option value="paypal">PayPal</option>
+      <option value="bank">Transferencia Bancaria</option>
+    </select>
+    <button type="submit">Pagar</button>
+  </form>
+{% endblock %}
