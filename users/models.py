@@ -27,6 +27,10 @@ class User(AbstractUser):
 
     def is_customer(self):
         return self.role == self.CUSTOMER
+    
+    def has_complete_registration(self):
+        """ Verifica si el usuario tiene los datos esenciales completos """
+        return bool(self.document_type and self.document_number and self.address)
 
     class Meta:
         verbose_name = "Usuario"

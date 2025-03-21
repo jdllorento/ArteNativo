@@ -11,7 +11,7 @@ def user_login(request):
 
         if user is not None:
             login(request, user)
-            return redirect("dashboard")  # Redirigir al dashboard según el rol
+            return redirect("dashboard")
         else:
             return render(request, "users/login.html", {"error": "Credenciales incorrectas"})
 
@@ -38,31 +38,24 @@ def basic_register(request):
         form = BasicRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            # Establecer el rol a "cliente" (ajusta según tu implementación)
             user.role = user.CUSTOMER  
             user.save()
             login(request, user)
-            return redirect('dashboard')  # Redirige al dashboard u otra página
+            return redirect('dashboard')
     else:
         form = BasicRegistrationForm()
     return render(request, 'users/basic_register.html', {'form': form})
 
+@login_required
 def full_register(request):
-    """
-    Registro completo: solicita datos adicionales.
-    """
+    user = request.user  # Usuario autenticado
+
     if request.method == 'POST':
-        form = FullRegistrationForm(request.POST)
+        form = FullRegistrationForm(request.POST, instance=user)  # Usar usuario actual
         if form.is_valid():
-            user = form.save(commit=False)
-            user.role = user.CUSTOMER  # Establecer rol de cliente
-            # Los campos first_name, last_name y email se asignan automáticamente al usar UserCreationForm
-            # Guardamos el usuario; para el campo 'address' podrías guardarlo en un perfil extendido o en el modelo Customer
-            user.save()
-            # Si usas un modelo Customer, podrías crear una instancia de Customer aquí, por ejemplo:
-            # Customer.objects.create(user=user, address=form.cleaned_data.get('address'))
-            login(request, user)
-            return redirect('dashboard')
+            form.save()  # Guardar la actualización
+            return redirect('dashboard')  # Redirigir tras completar
     else:
-        form = FullRegistrationForm()
+        form = FullRegistrationForm(instance=user)
+
     return render(request, 'users/full_register.html', {'form': form})
