@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+
 class User(AbstractUser):
     ADMIN = "admin"
     CUSTOMER = "customer"
@@ -10,7 +11,8 @@ class User(AbstractUser):
         (CUSTOMER, "Cliente"),
     ]
 
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default=CUSTOMER)
+    role = models.CharField(
+        max_length=10, choices=ROLE_CHOICES, default=CUSTOMER)
     address = models.TextField(blank=True, null=True)
 
     document_type = models.CharField(max_length=3, choices=[
@@ -27,7 +29,7 @@ class User(AbstractUser):
 
     def is_customer(self):
         return self.role == self.CUSTOMER
-    
+
     def has_complete_registration(self):
         """ Verifica si el usuario tiene los datos esenciales completos """
         return bool(self.document_type and self.document_number and self.address)
@@ -36,8 +38,9 @@ class User(AbstractUser):
         verbose_name = "Usuario"
         verbose_name_plural = "Usuarios"
 
+
 class Customer(User):
-    #address = models.TextField(blank=True, null=True)
+    # address = models.TextField(blank=True, null=True)
 
     class Meta:
         verbose_name = "Cliente"

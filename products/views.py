@@ -5,11 +5,12 @@ from django.contrib.auth.decorators import login_required
 from .forms import ReviewForm
 # Create your views here.
 
+
 def product_list(request):
     order = request.GET.get('order', 'default')
     category_id = request.GET.get('category', None)
     categories = Category.objects.all()
-    
+
     products = Product.objects.annotate(average_rating=Avg('reviews__rating'))
 
     if category_id:
@@ -18,17 +19,19 @@ def product_list(request):
     if order == 'rating':
         products = products.order_by('-average_rating')
 
-    return render(request, 'products/product_list.html', {'products':products, 'order':order,'categories':categories, 'selected_category': category_id})
+    return render(request, 'products/product_list.html', {'products': products, 'order': order, 'categories': categories, 'selected_category': category_id})
+
 
 def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     reviews = product.reviews.all()
-    average_rating=Avg('reviews__rating')
-    return render(request, 'products/product_detail.html', {'product': product, 'reviews':reviews, 'average_rating':average_rating})
+    average_rating = Avg('reviews__rating')
+    return render(request, 'products/product_detail.html', {'product': product, 'reviews': reviews, 'average_rating': average_rating})
+
 
 @login_required
 def add_review(request, product_id):
-    product = get_object_or_404(Product, id = product_id)
+    product = get_object_or_404(Product, id=product_id)
     if request.method == "POST":
         form = ReviewForm(request.POST)
         if form.is_valid():
@@ -40,4 +43,4 @@ def add_review(request, product_id):
     else:
         form = ReviewForm()
 
-    return render(request, 'products/add_review.html', {'form':form, 'product':product})
+    return render(request, 'products/add_review.html', {'form': form, 'product': product})

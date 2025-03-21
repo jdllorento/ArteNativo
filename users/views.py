@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import BasicRegistrationForm, FullRegistrationForm
 
+
 def user_login(request):
     if request.method == "POST":
         username = request.POST["username"]
@@ -30,6 +31,7 @@ def user_logout(request):
     logout(request)
     return redirect("login")
 
+
 def basic_register(request):
     """
     Registro básico: solo username y password.
@@ -38,7 +40,7 @@ def basic_register(request):
         form = BasicRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.role = user.CUSTOMER  
+            user.role = user.CUSTOMER
             user.save()
             login(request, user)
             return redirect('dashboard')
@@ -46,12 +48,14 @@ def basic_register(request):
         form = BasicRegistrationForm()
     return render(request, 'users/basic_register.html', {'form': form})
 
+
 @login_required
 def full_register(request):
     user = request.user  # Usuario autenticado
 
     if request.method == 'POST':
-        form = FullRegistrationForm(request.POST, instance=user)  # Usar usuario actual
+        form = FullRegistrationForm(
+            request.POST, instance=user)  # Usar usuario actual
         if form.is_valid():
             form.save()  # Guardar la actualización
             return redirect('dashboard')  # Redirigir tras completar

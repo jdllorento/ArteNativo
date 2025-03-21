@@ -10,20 +10,25 @@ DOCUMENT_TYPES = [
     ('PP', 'Pasaporte'),
 ]
 
+
 class BasicRegistrationForm(UserCreationForm):
     class Meta:
         model = User
         # Se requieren solo username y password
         fields = ['username', 'password1', 'password2']
 
+
 User = get_user_model()
 
+
 class FullRegistrationForm(forms.ModelForm):
-    email = forms.EmailField(required=True)  # Hacer que el email sea obligatorio
+    # Hacer que el email sea obligatorio
+    email = forms.EmailField(required=True)
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'document_type', 'document_number', 'address']
+        fields = ['first_name', 'last_name', 'email',
+                  'document_type', 'document_number', 'address']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -10,12 +10,13 @@ from cart.models import Cart
 from .utils import generate_pdf
 # Create your views here.
 
+
 @login_required
 def checkout(request):
     cart = get_object_or_404(Cart, user=request.user)
     print("Carrito encontrado:", cart.id)  # Depuración
 
-    if not request.user.has_complete_registration():  
+    if not request.user.has_complete_registration():
         return redirect('full_register')
 
     if request.method == "POST":
@@ -42,14 +43,16 @@ def purchase_confirmation(request):
 
     cart_items = list(cart.items.all())
 
-    pdf_buffer = generate_pdf(cart_items, total_paid, payment_method, request.user)
+    pdf_buffer = generate_pdf(cart_items, total_paid,
+                              payment_method, request.user)
 
     cart.items.all().delete()
-    
-    messages.success(request, "Compra realizada con éxito. Tu carrito ha sido vaciado.")
 
+    messages.success(
+        request, "Compra realizada con éxito. Tu carrito ha sido vaciado.")
 
-    response = render(request, 'orders/purchase_confirmation.html', {'cart': cart, 'payment_method': payment_method, 'total_paid':total_paid, 'cart_items':cart_items})
+    response = render(request, 'orders/purchase_confirmation.html',
+                      {'cart': cart, 'payment_method': payment_method, 'total_paid': total_paid, 'cart_items': cart_items})
 
     response = HttpResponse(pdf_buffer, content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="factura.pdf"'

@@ -2,6 +2,7 @@ from io import BytesIO
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 
+
 def generate_pdf(cart_items, total_paid, payment_method, user):
     buffer = BytesIO()
 
@@ -17,7 +18,8 @@ def generate_pdf(cart_items, total_paid, payment_method, user):
     pdf.drawString(50, 660, "Productos:")
     y = 640
     for item in cart_items:
-        pdf.drawString(50, y, f"- {item.product.name} (Cantidad: {item.quantity}, Precio: ${item.product.price})")
+        pdf.drawString(
+            50, y, f"- {item.product.name} (Cantidad: {item.quantity}, Precio: ${item.product.price})")
         y -= 20
 
     pdf.showPage()
