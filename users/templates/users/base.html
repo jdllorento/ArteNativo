@@ -13,7 +13,7 @@
         <div class="container-fluid">
             <div class="d-flex align-items-center">
                 <img class="naybar-logo me-2"  src="/media/img/logotipoArteNativo.png" alt="logotipoArteNativo"  style="height: 40px;">
-                <a class="navbar-logo fs-2 p-2 mb-0" href="{% url 'product_list' %}">ArteNativo</a>
+                <a class="navbar-brand fs-2 p-2 mb-0" href="{% url 'product_list' %}">ArteNativo</a>
             </div>
             <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -21,7 +21,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'product_list' %}">Inicio</a>
+                            <a class="btn btn-custom-button:hover custom-button text-center" href="{% url 'product_list' %}">Inicio</a>
                         </li>
                         {% if user.is_authenticated %}
                             <li class="nav-item">
@@ -40,7 +40,7 @@
                             {% endif %}
                         {% else %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
+                                <a class="btn btn-custom-button:hover custom-button text-center" href="{% url 'login' %}">Iniciar Sesión</a>
                             </li>
                         {% endif %}
                     </ul>

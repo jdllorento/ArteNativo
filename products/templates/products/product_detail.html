@@ -1,52 +1,62 @@
 {% extends 'products/base.html' %}
-
+{% load static %}
 {% block content %}
-<div class="container mt-5">
-    <div class="card">
+    <div class="container-fluid mt-5">
+        <div class="card">
+            <div class="d-flex align-items-center justify-content-center">
         {% if product.image %}
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid img-thumbnail">
         {% else %}
-            <img src="/media/products/default.jpg" alt="Imagen no disponible" class="product-image">
+            <img src="/media/products/default.jpg" alt="Imagen no disponible" class="img-fluid img-thumbnail">
         {% endif %}
+            </div>
+
         <div class="card-body">
-            <h2>{{ product.name }}</h2>
-            <p>Calificación promedio: {{ product.average_rating|default:0|floatformat:1 }} ⭐</p>
-            <p><strong>Descripción:</strong> {{ product.description }}</p>
-            <p><strong>Precio:</strong> ${{ product.price }}</p>
-            <p><strong>Categoría:</strong> {{ product.category }}</p>
+            <h2 class="card-title text-start fw-bold">{{ product.name }}</h2>
+            <p class="card-text">Calificación promedio: {{ product.average_rating|default:0|floatformat:1 }} ⭐</p>
+            <p class="card-text"><strong>Descripción:</strong> {{ product.description }}</p>
+            <p class="card-text"><strong>Precio:</strong> ${{ product.price }}</p>
+            <p class="card-text"><strong>Categoría:</strong> {{ product.category }}</p>
 
-            <form method="POST" action="{% url 'add_to_cart' product.id %}">
+            <form method="POST" action="{% url 'add_to_cart' product.id %}" class="mb-3">
                 {% csrf_token %}
-                <label for="quantity">Cantidad:</label>
-                <input type="number" name="quantity" id="quantity" value="1" min="1" max="{{ product.stock }}">
-                <button type="submit" class="btn btn-primary">Añadir al carrito</button>
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Cantidad:</label>
+                    <input type="number" name="quantity" id="quantity" value="1" min="1" max="{{ product.stock }}" class="form-control">
+                </div>
+                <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-custom-button:hover custom-button text-center">Comprar ahora</button>
             </form>
-            <a href="{% url 'cart_detail' %}" class="btn btn-secondary">Ver Carrito</a>
-
-            <h3>Reseñas:</h3>
-            {% if reviews %}
-                {% for review in reviews %}
-                    <div class="card my-2">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ review.user.username }}</h5>
-                            <p class="card-text">Rating: {{ review.rating }} ⭐</p>
-                            <p class="card-text">{{ review.comment }}</p>
+            <a href="{% url 'cart_detail' %}" class="btn btn-success text-center">Ver Carrito</a>
+            </div>
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                <h3 class="card-title text-start fw-bold">Reseñas.</h3>
+                {% if reviews %}
+                    {% for review in reviews %}
+                        <div class="card my-2">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ review.user.username }}</h5>
+                                <p class="card-text">Rating: {{ review.rating }} ⭐</p>
+                                <p class="card-text">{{ review.comment }}</p>
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p>No hay reseñas aún.</p>
-            {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <p class="card-text text-secondary">No hay reseñas aún.</p>
+                {% endif %}
 
-            {% if user.is_authenticated %}
-                <a href="{% url 'add_review' product.id %}" class="btn btn-primary">Agregar Review</a>
-            {% else %}
-                <p><a href="{% url 'login' %}">Inicia sesión</a> para agregar una reseña.</p>
-            {% endif %}
+                {% if user.is_authenticated %}
+                    <a href="{% url 'add_review' product.id %}" class="btn btn-primary">Agregar Review</a>
+                {% else %}
+                    <p>¿Quisieras añadir alguna reseña?👉<p><a href="{% url 'login' %}">¡ingresa aquí!</a>👈</p>
+                {% endif %}
 
-            <p><strong>Fecha de agregado:</strong> {{ product.date_added }}</p>
-            <a href="{% url 'product_list' %}" class="btn btn-secondary">Volver</a>
+                <p><strong>Fecha de agregado:</strong> {{ product.date_added }}</p>
+            </div>
+            <div class="d-grid gap-2">
+            <a href="{% url 'product_list' %}" class="btn btn-custom-button:hover custom-button text-center">Volver</a>
+            </div>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}

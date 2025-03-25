@@ -1,0 +1,27 @@
+.user-container{
+    background-color: rgb(5, 95, 61);
+}
+
+.custom-title {
+    font-size: 2rem;
+}
+.custom-label {
+    font-size: 1.2rem;
+}
+.custom-button {
+    font-size: 1.1rem;
+    background-color: rgb(121, 163, 121);
+    color: white;
+    border-color: mediumaquamarine;
+}
+.custom-button:hover {
+    background-color: rgb(5, 95, 61);
+    color: white;
+    border-color: darkseagreen;
+}
+.Wallpaper {
+    background-image: url( "https://us.123rf.com/450wm/nikol85/nikol852302/nikol85230200048/199265346-texture-of-old-craft-white-green-and-olive-color-paper-background-macro-structure-of-vintage.jpg?ver=6");
+    background-size: contain;
+    background-position: center;
+    background-repeat: round;
+}
