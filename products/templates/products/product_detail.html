@@ -48,7 +48,7 @@
                 {% if user.is_authenticated %}
                     <a href="{% url 'add_review' product.id %}" class="btn btn-primary">Agregar Review</a>
                 {% else %}
-                    <p>¿Quisieras añadir alguna reseña?👉<p><a href="{% url 'login' %}">¡ingresa aquí!</a>👈</p>
+                    <p>¿Quisieras añadir alguna reseña?<p>👉<a href="{% url 'login' %}">¡ingresa aquí!</a>👈</p>
                 {% endif %}
 
                 <p><strong>Fecha de agregado:</strong> {{ product.date_added }}</p>

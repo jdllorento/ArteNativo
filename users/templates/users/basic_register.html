@@ -1,4 +1,7 @@
-{% extends 'users/base.html' %} {% load static %} {% block content %}
+{% extends 'users/base.html' %} 
+{% load static %} 
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -26,7 +29,8 @@
                     
                     <div>
                       <label for="username" class="form-label custom-label">Nombre de usuario<span class="text-danger">*</span></label>
-                      <input type="username" name="username" class="form-control form-control-lg custom-input" placeholder="Ingrese su nombre de usuario" autocomplete="off" required/>                      {% if form.username.errors %}
+                      <input type="username" name="username" class="form-control form-control-lg custom-input" placeholder="Ingrese su nombre de usuario" autocomplete="off" required/>                      
+                      {% if form.username.errors %}
                       <div class="text-danger">
                         <small>{{ form.username.errors }}</small>
                       </div>
@@ -46,7 +50,8 @@
                     <div>
                       <label for="password1" class="form-label
                       custom-label">Contraseña<span class="text-danger">*</span></label>
-                      <input type="password" name="password1" class="form-control form-control-lg custom-input" placeholder="Ingrese la contraseña" autocomplete="off" required/>                      {% if form.password1.errors %}
+                      <input type="password" name="password1" class="form-control form-control-lg custom-input" placeholder="Ingrese la contraseña" autocomplete="off" required/>                      
+                      {% if form.password1.errors %}
                       <div class="text-danger">
                         <small>{{ form.password1.errors }}</small>
                       </div>
