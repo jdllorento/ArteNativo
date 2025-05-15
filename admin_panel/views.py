@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import ProductForm
-
+from django.utils.translation import gettext_lazy as _
 # Create your views here.
 
 

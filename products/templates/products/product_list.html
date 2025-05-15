@@ -1,34 +1,35 @@
-{% extends 'products/base.html' %}
+{% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 <div class="container mt-5">
     <h2>
         {% if user.is_authenticated %}
             {% if user.is_staff %}
-                ¡Bienvenido, administrador {{ user.username }}! 👑
+                {% trans "¡Bienvenido, administrador" %} {{ user.username }}! 👑
             {% else %}
-                ¡Hola, {{ user.username }}!
+                {% trans "¡Hola, " %} {{ user.username }}!
             {% endif %}
         {% else %}
-            ¡Bienvenido a nuestra tienda! 🛍️
+            {% trans "¡Bienvenido a nuestra tienda!" %} 🛍️
         {% endif %}
     </h2>
     <div class="row">
         <form method="GET" action="{% url 'product_list' %}">
             <input type="hidden" name="category" value="{{ selected_category }}">
-            <button type="submit" name="order" value="rating" class="btn btn-primary">Ordenar por mejor calificación</button>
+            <button type="submit" name="order" value="rating" class="btn btn-primary">{% trans "Ordenar por mejor calificación" %}</button>
         </form>
 
         <form method="GET" action="{% url 'product_list' %}">
-            <label for="category">Filtrar por categoría:</label>
+            <label for="category">{% trans "Filtrar por categoría" %}:</label>
             <select name="category" id="category" onchange="this.form.submit()">
-                <option value="">Todas</option>
+                <option value="">{% trans "Todas" %}</option>
                 {% for category in categories %}
                     <option value="{{ category.id }}" {% if category.id|stringformat:"s" == selected_category %}selected{% endif %}>
                         {{ category.name }}
                     </option>
                 {% empty %}
-                    <option disabled>No hay categorías disponibles</option>
+                    <option disabled>{% trans "No hay categorías disponibles" %}</option>
                 {% endfor %}
             </select>
         </form>
@@ -39,17 +40,17 @@
                 {% if product.image %}
                     <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
                 {% else %}
-                    <img src="/media/products/default.jpg" alt="Imagen no disponible" class="product-image">
+                    <img src="/media/products/default.jpg" alt={% trans "Imagen no disponible" %} class="product-image">
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ product.name }}</h5>
-                    <p>Calificación promedio: {{ product.average_rating|default:0|floatformat:1 }} ⭐</p>
-                    <p class="card-text"><strong>Precio:</strong> ${{ product.price }}</p>
-                    <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">Ver detalles</a>
+                    <p>{% trans "Calificación promedio:" %} {{ product.average_rating|default:0|floatformat:1 }} ⭐</p>
+                    <p class="card-text"><strong>{% trans "Precio:" %}</strong> ${{ product.price }}</p>
+                    <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">{% trans "Ver detalles" %}</a>
 
                     {% if user.is_authenticated and user.is_staff %}
                         <p>
-                            Stock disponible: 
+                            {% trans "Stock disponible:" %}
                                 <span style="color: {% if product.stock <= 5 %}red{% else %}black{% endif %}; font-weight: bold;">
                                     {{ product.stock }}
                                 </span>
@@ -59,7 +60,7 @@
             </div>
         </div>
         {% empty %}
-        <p>No hay productos disponibles.</p>
+        <p>{% trans "No hay productos disponibles." %}</p>
         {% endfor %}
     </div>
 </div>

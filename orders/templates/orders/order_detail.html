@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% block content %}
-  <h2>Detalle de la Orden #{{ order.id }}</h2>
+<h2>{% trans "Detalle de la Orden #{{ order.id }}" %}</h2>
 
-  <p><strong>Fecha de creación:</strong> {{ order.created_at }}</p>
-  <p><strong>Método de pago:</strong> {{ order.payment_method }}</p>
-  <p><strong>Total:</strong> ${{ order.total }}</p>
+<p><strong>{% trans "Fecha de creación:" %}</strong> {{ order.created_at }}</p>
+<p><strong>{% trans "Método de pago:" %}</strong> {{ order.payment_method }}</p>
+<p><strong>{% trans "Total:" %}</strong> ${{ order.total }}</p>
 
-  <h3>Productos en la orden:</h3>
-  <ul>
-    {% for item in order.items.all %}
-      <li>{{ item.product.name }} - Cantidad: {{ item.quantity }} - Precio: ${{ item.product.price }}</li>
-    {% empty %}
-      <li>No hay productos en esta orden.</li>
-    {% endfor %}
-  </ul>
+<h3>Productos en la orden:</h3>
+<ul>
+  {% for item in order.items.all %}
+  <li>{% trans "{{ item.product.name }} - Cantidad: {{ item.quantity }} - Precio: ${{ item.product.price }}" %}</li>
+  {% empty %}
+  <li>{% trans "No hay productos en esta orden." %}</li>
+  {% endfor %}
+</ul>
 
-  <a href="{% url 'product_list' %}">Volver a la tienda</a>
+<a href="{% url 'product_list' %}">{% trans "Volver a la tienda" %}</a>
 {% endblock %}

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import BasicRegistrationForm, FullRegistrationForm
-
+from django.utils.translation import gettext_lazy as _
 
 def user_login(request):
     if request.method == "POST":
@@ -14,7 +14,7 @@ def user_login(request):
             login(request, user)
             return redirect("dashboard")
         else:
-            return render(request, "users/login.html", {"error": "Credenciales incorrectas"})
+            return render(request, "users/login.html", {"error": _("Credenciales incorrectas")})
 
     return render(request, "users/login.html")
 

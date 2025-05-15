@@ -3,6 +3,7 @@ from django.db.models import Avg
 from .models import Product, Category
 from django.contrib.auth.decorators import login_required
 from .forms import ReviewForm
+from django.utils.translation import gettext_lazy as _
 # Create your views here.
 
 

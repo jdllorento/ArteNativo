@@ -1,19 +1,19 @@
-{% extends 'orders/base.html' %}
-
+{% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
-  <h2>Confirmación de Compra</h2>
+<h2>{% trans "Confirmación de Compra" %}</h2>
 
-  <p><strong>Método de pago:</strong> {{ payment_method }}</p>
-  <p><strong>Total:</strong> ${{ total_paid }}</p>
+<p><strong>{% trans "Método de pago:" %}</strong> {{ payment_method }}</p>
+<p><strong>{% trans "Total:" %}</strong> ${{ total_paid }}</p>
 
-  <h3>Productos en tu compra:</h3>
-  <ul>
-    {% for item in cart_items %}
-      <li>{{ item.product.name }} - Cantidad: {{ item.quantity }} - Precio: ${{ item.product.price }}</li>
-    {% empty %}
-      <li>No hay productos en esta compra.</li>
-    {% endfor %}
-  </ul>
+<h3>{% trans "Productos en tu compra:" %}</h3>
+<ul>
+  {% for item in cart_items %}
+  <li>{% trans "{{ item.product.name }} - Cantidad: {{ item.quantity }} - Precio: ${{ item.product.price }}" %}</li>
+  {% empty %}
+  <li>{% trans "No hay productos en esta compra." %}</li>
+  {% endfor %}
+</ul>
 
-  <a href="{% url 'product_list' %}">Volver a la tienda</a>
+<a href="{% url 'product_list' %}">{% trans "Volver a la tienda" %}</a>
 {% endblock %}

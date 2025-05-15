@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environment
+ArteNativo_Project/venv/
+
+# Django
+*.log
+/db.sqlite3
+/media/
+
+# Operating System
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo 

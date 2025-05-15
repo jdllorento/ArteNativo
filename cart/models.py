@@ -1,5 +1,7 @@
 from django.db import models
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
+
 # Create your models here.
 
 
@@ -11,7 +13,7 @@ class Cart(models.Model):
         return sum(item.total_price() for item in self.items.all())
 
     def __str__(self):
-        return f"Carrito de {self.user.username}"
+        return _("Cart of {username}").format(username=self.user.username)
 
 
 class CartItem(models.Model):
@@ -24,4 +26,4 @@ class CartItem(models.Model):
         return self.product.price * self.quantity
 
     def __str__(self):
-        return f"{self.quantity} x {self.product.name}"
+        return _("{quantity} x {product_name}").format(quantity=self.quantity, product_name=self.product.name)
