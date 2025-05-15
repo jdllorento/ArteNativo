@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Cart, CartItem
 from products.models import Product
+from django.utils.translation import gettext_lazy as _
 
 # Create your views here.
 
@@ -23,8 +24,8 @@ def add_to_cart(request, product_id):
             if quantity < 1:
                 quantity = 1
             elif quantity > product.stock:
-                messages.error(
-                    request, f"Solo quedan {product.stock} unidades disponibles.")
+                message = _("Solo quedan {stock_count} unidades disponibles.").format(stock_count=product.stock)
+                messages.error(request, message)
                 quantity = product.stock
 
             cart_item, created = CartItem.objects.get_or_create(
@@ -35,7 +36,7 @@ def add_to_cart(request, product_id):
                 cart_item.quantity = quantity
 
             cart_item.save()
-            messages.success(request, "¡Producto agregado al carrito!")
+            messages.success(request, _("¡Producto agregado al carrito!"))
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', reverse('product_list')))
 

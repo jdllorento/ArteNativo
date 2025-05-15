@@ -1,18 +1,19 @@
-{% extends 'cart/base.html' %}
+{% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
-<h2>Carrito de Compras</h2>
+<h2>{% trans "Carrito de Compras" %}</h2>
 <ul>
     {% for item in cart.items.all %}
-        <li>
-            {{ item.product.name }} - {{ item.quantity }} x ${{ item.product.price }}
-            = <strong>${{ item.total_price }}</strong>
-            <a href="{% url 'remove_from_cart' item.product.id %}">Eliminar</a>
-        </li>
+    <li>
+        {{ item.product.name }} - {{ item.quantity }} x ${{ item.product.price }}
+        = <strong>${{ item.total_price }}</strong>
+        <a href="{% url 'remove_from_cart' item.product.id %}">{% trans "Eliminar" %}</a>
+    </li>
     {% empty %}
-        <p>Tu carrito está vacío.</p>
+    <p>{% translate "Tu carrito está vacío." %}</p>
     {% endfor %}
 </ul>
-<p><strong>Subtotal:</strong> ${{ cart.total_price }}</p>
-<a class="btn-btn primary" href="{% url 'checkout' %}">Pagar</a>
+<p><strong>{% translate "Subtotal" %}:</strong> ${{ cart.total_price }}</p>
+<a class="btn-btn primary" href="{% url 'checkout' %}">{% translate "Pagar" %}</a>
 {% endblock %}

@@ -1,16 +1,16 @@
-{% extends 'orders/base.html' %}
-
+{% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
-  <h2>Checkout</h2>
+<h2>{% trans "Checkout" %}</h2>
 
-  <form method="post">
-    {% csrf_token %}
-    <label for="payment_method">Selecciona método de pago:</label>
-    <select name="payment_method" id="payment_method" required>
-      <option value="card">Tarjeta</option>
-      <option value="paypal">PayPal</option>
-      <option value="bank">Transferencia Bancaria</option>
-    </select>
-    <button type="submit">Pagar</button>
-  </form>
+<form method="post">
+  {% csrf_token %}
+  <label for="payment_method">{% trans "Selecciona método de pago:" %}</label>
+  <select name="payment_method" id="payment_method" required>
+    <option value="card">{% trans "Tarjeta" %}</option>
+    <option value="paypal">{% trans "PayPal" %}</option>
+    <option value="bank">{% trans "Transferencia Bancaria" %}</option>
+  </select>
+  <button type="submit">{% trans "Pagar" %}</button>
+</form>
 {% endblock %}

@@ -8,6 +8,7 @@ from django.db import IntegrityError
 from .models import Order
 from cart.models import Cart
 from .utils import generate_pdf
+from django.utils.translation import gettext_lazy as _
 # Create your views here.
 
 
@@ -25,7 +26,7 @@ def checkout(request):
         if payment_method:
             # Guardar el método de pago en la sesión
             request.session['payment_method'] = payment_method
-            messages.success(request, "Compra realizada con éxito.")
+            messages.success(request, _("Compra realizada con éxito."))
             return redirect('purchase_confirmation')
 
     return render(request, 'orders/checkout.html', {'cart': cart})
@@ -35,7 +36,7 @@ def checkout(request):
 def purchase_confirmation(request):
     cart = get_object_or_404(Cart, user=request.user)
     if cart.items.count() == 0:
-        messages.error(request, "Tu carrito está vacío.")
+        messages.error(request, _("Tu carrito está vacío."))
         return redirect('cart_detail')
 
     payment_method = request.session.get('payment_method')
@@ -49,7 +50,7 @@ def purchase_confirmation(request):
     cart.items.all().delete()
 
     messages.success(
-        request, "Compra realizada con éxito. Tu carrito ha sido vaciado.")
+        request, _("Compra realizada con éxito. Tu carrito ha sido vaciado."))
 
     response = render(request, 'orders/purchase_confirmation.html',
                       {'cart': cart, 'payment_method': payment_method, 'total_paid': total_paid, 'cart_items': cart_items})

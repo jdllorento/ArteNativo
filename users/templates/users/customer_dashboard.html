@@ -1,18 +1,21 @@
-{% extends 'users/base.html' %}
-
+{% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cliente</title>
+    <title>{% trans "Cliente" %}</title>
 </head>
+
 <body>
-    <h2>Bienvenido, Cliente</h2>
-    <p>Puedes ver productos y realizar compras.</p>
-    <a href="{% url 'logout' %}" class = "btn btn-secondary">Cerrar sesión</a>
-    <a href="{% url 'product_list' %}" class = "btn btn-secondary">Home</a>
+    <h2>{% trans "Bienvenido, Cliente" %}</h2>
+    <p>{% trans "Puedes ver productos y realizar compras." %}</p>
+    <a href="{% url 'logout' %}" class="btn btn-secondary">{% trans "Cerrar sesión" %}</a>
+    <a href="{% url 'product_list' %}" class="btn btn-secondary">{% trans "Home" %}</a>
 </body>
+
 </html>
 {% endblock %}
