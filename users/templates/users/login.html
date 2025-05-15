@@ -31,8 +31,7 @@
                                         <label for="username" class="form-label custom-label">{% trans "Usuario" %}<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="username"
-                                            class="form-control form-control-lg custom-input" placeholder="{% trans "
-                                            Ingrese su nombre de usuario" %}" autocomplete="off" required />
+                                            class="form-control form-control-lg custom-input" placeholder="{% trans "Ingrese su nombre de usuario" %}" autocomplete="off" required />
                                         {% if form.username.errors %}
                                         <div class="text-danger">
                                             <small>{{ form.username.errors }}</small>
@@ -41,11 +40,9 @@
                                     </div>
 
                                     <div class="mb-3 text-start">
-                                        <label for="password" class="form-label custom-label">{% trans "Contraseña"
-                                            %}<span class="text-danger">*</span></label>
+                                        <label for="password" class="form-label custom-label">{% trans "Contraseña" %}<span class="text-danger">*</span></label>
                                         <input type="password" name="password"
-                                            class="form-control form-control-lg custom-input" placeholder="{% trans "
-                                            Ingrese la Contraseña" %}" autocomplete="off" required />
+                                            class="form-control form-control-lg custom-input" placeholder="{% trans "Ingrese la Contraseña" %}" autocomplete="off" required />
                                         {% if form.password.errors %}
                                         <div class="text-danger">
                                             <small>{{ form.password.errors }}</small>
@@ -55,8 +52,7 @@
                                     <br />
                                     <div class="d-grid">
                                         <button type="submit"
-                                            class="btn btn-custom-button:hover custom-button text-center">{% trans
-                                            "Ingresar" %}</button>
+                                            class="btn btn-custom-button:hover custom-button text-center">{% trans "Ingresar" %}</button>
                                     </div>
                                     <p class="mt-3">{% trans "¿No tienes cuenta?" %}<a
                                             href="{% url 'basic_register' %}">{% trans "Regístrate" %}
