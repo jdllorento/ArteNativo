@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-15 16:44-0500\n"
+"POT-Creation-Date: 2025-05-15 17:34-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1441,8 +1441,9 @@ msgid "Agregar Review"
 msgstr "Add review"
 
 #: .\products\templates\products\product_detail.html:44
+#: .\users\templates\users\basic_register.html:72
 #: .\users\templates\users\full_register.html:22
-msgid "Inicia sesión"
+msgid "Iniciar sesión"
 msgstr "Log in"
 
 #: .\products\templates\products\product_detail.html:44
@@ -1552,44 +1553,51 @@ msgstr "Product list"
 msgid "Agregar producto"
 msgstr "Add Product"
 
-#: .\users\templates\users\basic_register.html:8
-#: .\users\templates\users\basic_register.html:18
+#: .\users\templates\users\basic_register.html:11
 msgid "Registro"
 msgstr "Register"
 
-#: .\users\templates\users\basic_register.html:29
+#: .\users\templates\users\basic_register.html:22
 msgid "Nombre de usuario"
 msgstr "Username"
 
-#: .\users\templates\users\basic_register.html:32
-msgid " Ingrese su nombre de usuario"
+#: .\users\templates\users\basic_register.html:25
+msgid "Ingrese su nombre de usuario"
 msgstr "Enter your username"
 
-#: .\users\templates\users\basic_register.html:41
+#: .\users\templates\users\basic_register.html:34
 msgid "Correo electrónico"
 msgstr "Email"
 
-#: .\users\templates\users\basic_register.html:44
-msgid " Ingrese su correo electrónico"
+#: .\users\templates\users\basic_register.html:37
+msgid "Ingrese su correo electrónico"
 msgstr "Enter your Email"
 
-#: .\users\templates\users\basic_register.html:54
+#: .\users\templates\users\basic_register.html:47
+#: .\users\templates\users\login.html:43
 msgid "Contraseña"
 msgstr "Password"
 
-#: .\users\templates\users\basic_register.html:56
-msgid " Ingrese la contraseña"
+#: .\users\templates\users\basic_register.html:49
+msgid "Ingrese la contraseña"
 msgstr "Enter your password"
 
-#: .\users\templates\users\basic_register.html:66
+#: .\users\templates\users\basic_register.html:59
 msgid "Confirmar contraseña"
 msgstr "Confirm password"
 
-#: .\users\templates\users\basic_register.html:68
-msgid " Confirme la contraseña"
+#: .\users\templates\users\basic_register.html:61
+#, fuzzy
+#| msgid " Confirme la contraseña"
+msgid "Confirme la contraseña"
 msgstr "Confirm your password"
 
-#: .\users\templates\users\basic_register.html:80
+#: .\users\templates\users\basic_register.html:70
+#: .\users\templates\users\full_register.html:18
+msgid "Registrarse"
+msgstr "Register"
+
+#: .\users\templates\users\basic_register.html:72
 #: .\users\templates\users\full_register.html:22
 msgid "¿Ya tienes cuenta?"
 msgstr "Already have an account?"
@@ -1615,10 +1623,6 @@ msgstr ""
 msgid "Registro Completo"
 msgstr "Full register"
 
-#: .\users\templates\users\full_register.html:18
-msgid "Registrarse"
-msgstr "Register"
-
 #: .\users\templates\users\full_register.html:20
 msgid "¿Deseas registrarte de forma básica?"
 msgstr "Do you wish to do a basic register?"
@@ -1627,25 +1631,26 @@ msgstr "Do you wish to do a basic register?"
 msgid "Login"
 msgstr "Log in"
 
-#: .\users\templates\users\login.html:21
-#, fuzzy
-#| msgid "Iniciar Sesión"
-msgid "Iniciar sesión"
-msgstr "log in"
 
 #: .\users\templates\users\login.html:31
 msgid "Usuario"
 msgstr "User"
 
-#: .\users\templates\users\login.html:61
+
+
+#: .\users\templates\users\login.html:55
+msgid "Ingresar"
+msgstr ""
+
+#: .\users\templates\users\login.html:57
 msgid "¿No tienes cuenta?"
 msgstr "Don't have an account?"
 
-#: .\users\templates\users\login.html:62
+#: .\users\templates\users\login.html:58
 msgid "Regístrate"
 msgstr "Create an account"
 
-#: .\users\templates\users\login.html:63
+#: .\users\templates\users\login.html:59
 msgid "aquí"
 msgstr "here"
 
