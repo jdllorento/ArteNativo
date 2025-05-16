@@ -1,6 +1,5 @@
-{% extends 'base.html' %}
+{% extends 'products/base.html' %}
 {% load i18n %}
-
 {% block content %}
 <div class="container mt-5">
     <h2>
@@ -36,8 +35,8 @@
 
         {% for product in products %}
         <div class="col-md-4 mb-4">
-            <div class="card">
-                {% if product.image %}
+            <div class="card" style="width: 14rem;">
+            {% if product.image %}
                     <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
                 {% else %}
                     <img src="/media/products/default.jpg" alt={% trans "Imagen no disponible" %} class="product-image">
@@ -50,10 +49,8 @@
 
                     {% if user.is_authenticated and user.is_staff %}
                         <p>
-                            {% trans "Stock disponible:" %}
-                                <span style="color: {% if product.stock <= 5 %}red{% else %}black{% endif %}; font-weight: bold;">
-                                    {{ product.stock }}
-                                </span>
+                            Stock disponible: 
+                                
                         </p>
                     {% endif %}
                 </div>
