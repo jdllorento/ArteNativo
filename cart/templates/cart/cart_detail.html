@@ -7,7 +7,7 @@
         <!-- Sección de productos en el carrito -->
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-success text-white">
                     <h5 class="mb-0">{% trans "Productos en tu carrito" %}</h5>
                 </div>
                 <div class="card-body">
@@ -58,7 +58,7 @@
                     <p><strong>{% trans "Subtotal:" %}</strong> ${{ cart.total_price }}</p>
                     <hr>
                     <h5><strong>{% trans "Total:" %}</strong> ${{ cart.total_price }}</h5>
-                    <a href="{% url 'checkout' %}" class="btn btn-primary w-100 mt-3">{% trans "Continuar compra" %}</a>
+                    <a href="{% url 'checkout' %}" class="btn btn-success w-100 mt-3">{% trans "Continuar compra" %}</a>
                 </div>
             </div>
         </div>
