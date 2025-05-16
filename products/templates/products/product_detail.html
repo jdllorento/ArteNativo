@@ -18,6 +18,9 @@
             <p class="text-muted">{% trans "Nuevo | +100 vendidos" %}</p>
             <p class="text-warning fw-bold">{% trans "Más vendido" %}</p>
             <p class="text-secondary">{% trans "Calificación promedio:" %} {{ product.average_rating|default:0|floatformat:1 }} ⭐ ({{ reviews|length }} {% trans "reseñas" %})</p>
+            {% if review_overview %}
+            <p class="text-secondary"><strong>Resumen generado con IA: </strong>{{ review_overview|linebreaksbr }}</p>
+            {% endif %}
 
             <h2 class="text-success fw-bold">{% trans "Oferta del día" %}</h2>
             <p class="text-decoration-line-through text-muted">${{ product.original_price }}</p>
@@ -26,24 +29,6 @@
             <a href="#" class="text-primary">{% trans "Ver los medios de pago" %}</a>
 
             <hr>
-
-            <!-- Opciones del producto -->
-            <p><strong>{% trans "Color:" %}</strong> {{ product.color }}</p>
-            <div class="d-flex">
-                {% for color_option in product.color_options %}
-                    <div class="me-2">
-                        <img src="{{ color_option.image.url }}" alt="{{ color_option.name }}" class="img-thumbnail" style="width: 50px; height: 50px;">
-                    </div>
-                {% endfor %}
-            </div>
-
-            <p class="mt-3"><strong>{% trans "Memoria interna:" %}</strong> {{ product.memory }}</p>
-            <div class="d-flex">
-                {% for memory_option in product.memory_options %}
-                    <button class="btn btn-outline-secondary me-2">{{ memory_option }}</button>
-                {% endfor %}
-            </div>
-
             <hr>
 
             <!-- Botones de acción -->
