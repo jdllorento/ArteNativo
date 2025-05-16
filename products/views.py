@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import ReviewForm
 from django.utils.translation import gettext_lazy as _
 from django.http import JsonResponse
+from django.utils.translation import get_language
 from .serializers import ProductsSerializer
 import google.generativeai as genai
 from .datasources import DatabaseProductDataSource, HardcodedProductDataSource, IProductDataSource
@@ -12,7 +13,6 @@ from .datasources import DatabaseProductDataSource, HardcodedProductDataSource, 
 
 genai.configure(api_key="aquivalaapikey")
 model = genai.GenerativeModel('gemini-2.0-flash')
-
 
 def product_list(request):
     order = request.GET.get('order', 'default')
@@ -37,12 +37,19 @@ def product_detail(request, product_id):
 
     review_text = [reviews for review in reviews]
 
+    language = get_language()
+    if language == 'es':
+        language = 'Spanish'
+    elif language == 'en':
+        language = 'English'
+
     review_overview = ""
 
     if review_text:
         prompt = f"""Here are some reviews for the product {product.name}:\n\n"""
         prompt += "\n".join(f"- {text}" for text in review_text)
-        prompt += f"\n\nGenerate a concise overview in spanish of what customers are saying about the product in these reviews. Highlight the main positive and negative points. Dont mention the customers or the rating specifically just say if it is positive, negative or mixed."
+        prompt += f"\n\nGenerate a concise overview of what customers are saying about the product in these reviews. Dont mention the customers specifically nor the score just say if it is positive, negative or mixed and a small reason why."
+        prompt += f"\n\nPlease provide the overview in {language}."
         try:
             response = model.generate_content(prompt)
             review_overview = response.text
