@@ -6,7 +6,11 @@ from .forms import ReviewForm
 from django.utils.translation import gettext_lazy as _
 from django.http import JsonResponse
 from .serializers import ProductsSerializer
+import google.generativeai as genai
 # Create your views here.
+
+genai.configure(api_key="AquiIriaelApi")
+model = genai.GenerativeModel('gemini-2.0-flash')
 
 
 def product_list(request):
@@ -29,7 +33,25 @@ def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     reviews = product.reviews.all()
     average_rating = Avg('reviews__rating')
-    return render(request, 'products/product_detail.html', {'product': product, 'reviews': reviews, 'average_rating': average_rating})
+
+    review_text = [reviews for review in reviews]
+
+    review_overview = ""
+
+    if review_text:
+        prompt = f"""Here are some reviews for the product {product.name}:\n\n"""
+        prompt += "\n".join(f"- {text}" for text in review_text)
+        prompt += f"\n\nGenerate a concise overview in spanish of what customers are saying about the product in these reviews. Highlight the main positive and negative points. Dont mention the customers or the rating specifically just say if it is positive, negative or mixed."
+        try:
+            response = model.generate_content(prompt)
+            review_overview = response.text
+        except Exception as e:
+            review_overview = "Error generating overview: " + str(e)
+            print(review_overview)
+    else:
+        review_overview = "No hay reseñas disponibles para este producto."
+
+    return render(request, 'products/product_detail.html', {'product': product, 'reviews': reviews, 'average_rating': average_rating, 'review_overview': review_overview})
 
 
 

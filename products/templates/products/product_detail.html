@@ -17,6 +17,9 @@
             <p class="card-text"><strong>Descripción:</strong> {{ product.description }}</p>
             <p class="card-text"><strong>Precio:</strong> ${{ product.price }}</p>
             <p class="card-text"><strong>Categoría:</strong> {{ product.category }}</p>
+            {% if review_overview %}
+            <p class="card-text"><strong>Resumen generado con IA: </strong>{{ review_overview|linebreaksbr }}</p>
+            {% endif %}
 
             <form method="POST" action="{% url 'add_to_cart' product.id %}" class="mb-3">
                 {% csrf_token %}
