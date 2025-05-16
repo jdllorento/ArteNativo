@@ -1,5 +1,5 @@
 {% extends 'products/base.html' %}
-{% load static %}
+{% load i18n %}
 {% block content %}
 <div class="container mt-5">
     <h2>
@@ -13,51 +13,74 @@
             ¡Bienvenido a nuestra tienda! 🛍️
         {% endif %}
     </h2>
-    <div class="row">
-        <form method="GET" action="{% url 'product_list' %}">
-            <input type="hidden" name="category" value="{{ selected_category }}">
-            <button type="submit" name="order" value="rating" class="btn btn-primary">Ordenar por mejor calificación</button>
-        </form>
-
-        <form method="GET" action="{% url 'product_list' %}">
-            <label for="category">Filtrar por categoría:</label>
-            <select name="category" id="category" onchange="this.form.submit()">
-                <option value="">Todas</option>
-                {% for category in categories %}
-                    <option value="{{ category.id }}" {% if category.id|stringformat:"s" == selected_category %}selected{% endif %}>
-                        {{ category.name }}
-                    </option>
-                {% empty %}
-                    <option disabled>No hay categorías disponibles</option>
-                {% endfor %}
-            </select>
-        </form>
-
-        {% for product in products %}
-        <div class="col-md-4 mb-4">
-            <div class="card" style="width: 14rem;">
-            {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
-                {% else %}
-                    <img src="/media/products/default.jpg" alt="Imagen no disponible" class="product-image">
-                {% endif %}
+    <form method="GET" action="{% url 'product_list' %}">
+        <label for="category">Filtrar por categoría:</label>
+        <select name="category" id="category" onchange="this.form.submit()">
+            <option value="">Todas</option>
+            {% for category in categories %}
+                <option value="{{ category.id }}" {% if category.id|stringformat:"s" == selected_category %}selected{% endif %}>
+                    {{ category.name }}
+                </option>
+            {% empty %}
+                <option disabled>No hay categorías disponibles</option>
+            {% endfor %}
+        </select>
+    </form>
+    <h2 class="mb-4">{% trans "Oferta del día" %}</h2>
+    {% if featured_product %}
+    <div class="card mb-4">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{ featured_product.image.url }}" class="img-fluid rounded-start" alt="{{ featured_product.name }}">
+            </div>
+            <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p>Calificación promedio: {{ product.average_rating|default:0|floatformat:1 }} ⭐</p>
-                    <p class="card-text"><strong>Precio:</strong> ${{ product.price }}</p>
-                    <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">Ver detalles</a>
-
-                    {% if user.is_authenticated and user.is_staff %}
-                        <p>
-                            Stock disponible: 
-                                
-                        </p>
-                    {% endif %}
+                    <h5 class="card-title">{{ featured_product.name }}</h5>
+                    <p class="card-text text-muted"><del>${{ featured_product.original_price }}</del></p>
+                    <p class="card-text text-danger fw-bold">${{ featured_product.price }}</p>
+                    <p class="card-text text-success">{% trans "Envío gratis" %}</p>
+                    <a href="{% url 'product_detail' featured_product.id %}" class="btn btn-primary">{% trans "Ver producto" %}</a>
                 </div>
             </div>
         </div>
-        {% empty %}
-        <p>No hay productos disponibles.</p>
+    </div>
+    {% else %}
+    <p>{% trans "No hay productos destacados en este momento." %}</p>
+    {% endif %}
+
+    <!-- Ofertas -->
+    <h2 class="mb-4">{% trans "Ofertas" %}</h2>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        {% for product in products %}
+        <div class="col">
+            <div class="card h-100">
+                <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.name }}" style="max-height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text text-muted"><del>${{ product.original_price }}</del></p>
+                    <p class="card-text text-danger fw-bold">${{ product.price }}</p>
+                    <p class="card-text text-success">{% trans "Envío gratis" %}</p>
+                    <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">{% trans "Ver producto" %}</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- También puede interesarte -->
+    <h2 class="mt-5 mb-4">{% trans "También puede interesarte" %}</h2>
+    <div class="row row-cols-1 row-cols-md-6 g-4">
+        {% for related_product in related_products %}
+        <div class="col">
+            <div class="card h-100">
+                <img src="{{ related_product.image.url }}" class="card-img-top" alt="{{ related_product.name }}">
+                <div class="card-body">
+                    <h6 class="card-title">{{ related_product.name }}</h6>
+                    <p class="card-text text-danger fw-bold">${{ related_product.price }}</p>
+                    <a href="{% url 'product_detail' related_product.id %}" class="btn btn-outline-primary btn-sm">{% trans "Ver producto" %}</a>
+                </div>
+            </div>
+        </div>
         {% endfor %}
     </div>
 </div>

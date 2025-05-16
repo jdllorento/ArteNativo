@@ -11,7 +11,7 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="user-container navbar-expand-lg navbar-dark">
+    <nav class="user-container navbar navbar-expand-lg user-container">
         <div class="container-fluid">
             <div class="d-flex align-items-center">
                 <img class="naybar-logo me-2" src="/media/img/logotipoArteNativo.png" alt="logotipoArteNativo" style="height: 40px;">
@@ -23,7 +23,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class= "btn btn-success text-center" href="{% url 'product_list' %}">Inicio</a>
+                        <a class="btn btn-success text-center" href="{% url 'product_list' %}">Inicio</a>
                     </li>
                     {% if user.is_authenticated %}
                         <li class="nav-item">
@@ -41,8 +41,7 @@
                             </li>
                         {% endif %}
                     {% else %}
-                        <br />
-                        <li class="nav-item">
+                                                <li class="nav-item">
                             <a class="btn btn-success text-center" href="{% url 'login' %}">Iniciar Sesión</a>
                         </li>
                     {% endif %}
@@ -57,19 +56,8 @@
         {% endblock %}
     </div>
 
-    <div class="container mt-3">
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            {% endfor %}
-        {% endif %}
-    </div>
-
     <!-- Footer -->
-    <footer class="user-container text-light text-center py-3 mt-4">
+    <footer class="user-container text-light text-center py-3 mt-4 bg-dark">
         <p>&copy; 2025 ArteNativo. Todos los derechos reservados.</p>
     </footer>
 
