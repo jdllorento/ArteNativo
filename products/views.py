@@ -6,6 +6,7 @@ from .forms import ReviewForm
 from django.utils.translation import gettext_lazy as _
 from django.http import JsonResponse
 from .serializers import ProductsSerializer
+from .datasources import DatabaseProductDataSource, HardcodedProductDataSource, IProductDataSource
 # Create your views here.
 
 
@@ -32,11 +33,19 @@ def product_detail(request, product_id):
     return render(request, 'products/product_detail.html', {'product': product, 'reviews': reviews, 'average_rating': average_rating})
 
 
-
 def serialize_products(request):
-    products = Product.objects.all()
+    source_type = request.GET.get('source', 'db')
+    
+    product_data_source: IProductDataSource
+    if source_type == 'hardcoded':
+        product_data_source = HardcodedProductDataSource()
+    else:
+        product_data_source = DatabaseProductDataSource()
+
+    products = product_data_source.get_products()
+    
     serializer = ProductsSerializer(products, many=True)
-    return JsonResponse({'Products Avaible':serializer.data})
+    return JsonResponse({'Products Available': serializer.data})
 
 
 @login_required
