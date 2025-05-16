@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-15 17:34-0500\n"
+"POT-Creation-Date: 2025-05-16 02:50-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\ArteNativo_Project\settings.py:125
+#: .\ArteNativo_Project\settings.py:127
 msgid "Spanish"
 msgstr ""
 
-#: .\ArteNativo_Project\settings.py:126
+#: .\ArteNativo_Project\settings.py:128
 msgid "English"
 msgstr ""
 
@@ -1251,7 +1251,7 @@ msgid "Connect, get help, or contribute"
 msgstr ""
 
 #: .\admin_panel\templates\admin_panel\add_product.html:5
-#: .\templates\base.html:38
+#: .\templates\base.html:47
 msgid "Agregar Producto"
 msgstr "Add Product"
 
@@ -1262,6 +1262,27 @@ msgstr "Save"
 #: .\admin_panel\templates\admin_panel\add_product.html:11
 msgid "Cancelar"
 msgstr "Cancel"
+
+#: .\alied_products\templates\alied_products\product_list.html:8
+#: .\products\templates\products\product_list.html:8
+#| msgid "Bienvenido, Administrador"
+msgid "¡Bienvenido, administrador"
+msgstr "Welcome, admin"
+
+#: .\alied_products\templates\alied_products\product_list.html:10
+#: .\products\templates\products\product_list.html:10
+msgid "¡Hola, "
+msgstr ""
+
+#: .\alied_products\templates\alied_products\product_list.html:13
+#| msgid "¡Bienvenido a nuestra tienda!"
+msgid "¡Bienvenido a los productos de nuestra tienda aliada!"
+msgstr "Welcome to the ally store's products"
+
+#: .\alied_products\templates\alied_products\product_list.html:32
+#: .\products\templates\products\product_list.html:52
+msgid "No hay productos disponibles."
+msgstr "There are no products available."
 
 #: .\cart\models.py:16
 #, python-brace-format
@@ -1278,21 +1299,59 @@ msgid "Carrito de Compras"
 msgstr "Shopping cart"
 
 #: .\cart\templates\cart\cart_detail.html:11
-msgid "Eliminar"
-msgstr "Delete"
+#| msgid "Productos en tu compra:"
+msgid "Productos en tu carrito"
+msgstr "Products in your purchase"
 
-#: .\cart\templates\cart\cart_detail.html:14 .\orders\views.py:39
-msgid "Tu carrito está vacío."
-msgstr "Your cart is empty"
+#: .\cart\templates\cart\cart_detail.html:18
+#| msgid "Agregar Producto"
+msgid "Producto"
+msgstr "Product"
 
-#: .\cart\templates\cart\cart_detail.html:17
+#: .\cart\templates\cart\cart_detail.html:19
+#| msgid "Cantidad:"
+msgid "Cantidad"
+msgstr "Quantity"
+
+#: .\cart\templates\cart\cart_detail.html:20
+msgid "Precio Unitario"
+msgstr "Unit price"
+
+#: .\cart\templates\cart\cart_detail.html:21
 msgid "Subtotal"
 msgstr "Subtotal"
 
-#: .\cart\templates\cart\cart_detail.html:18
-#: .\orders\templates\orders\checkout.html:14
-msgid "Pagar"
-msgstr "Checkout"
+#: .\cart\templates\cart\cart_detail.html:22
+msgid "Acciones"
+msgstr "Actions"
+
+#: .\cart\templates\cart\cart_detail.html:41
+msgid "Eliminar"
+msgstr "Delete"
+
+#: .\cart\templates\cart\cart_detail.html:48 .\orders\views.py:39
+msgid "Tu carrito está vacío."
+msgstr "Your cart is empty"
+
+#: .\cart\templates\cart\cart_detail.html:58
+msgid "Resumen de compra"
+msgstr "Purchase summary"
+
+#: .\cart\templates\cart\cart_detail.html:61
+#, fuzzy
+#| msgid "Subtotal"
+msgid "Subtotal:"
+msgstr "Subtotal"
+
+#: .\cart\templates\cart\cart_detail.html:63
+#: .\orders\templates\orders\order_detail.html:8
+#: .\orders\templates\orders\purchase_confirmation.html:7
+msgid "Total:"
+msgstr ""
+
+#: .\cart\templates\cart\cart_detail.html:64
+msgid "Continuar compra"
+msgstr "Continue purchase"
 
 #: .\cart\views.py:27
 #, python-brace-format
@@ -1323,6 +1382,10 @@ msgstr "PayPal"
 msgid "Transferencia Bancaria"
 msgstr "Bank Transfer"
 
+#: .\orders\templates\orders\checkout.html:14
+msgid "Pagar"
+msgstr "Checkout"
+
 #: .\orders\templates\orders\order_detail.html:4
 msgid "Detalle de la Orden #{{ order.id }}"
 msgstr "Order #{{ order.id }} detail"
@@ -1335,11 +1398,6 @@ msgstr "Creation date:"
 #: .\orders\templates\orders\purchase_confirmation.html:6
 msgid "Método de pago:"
 msgstr "Payment method:"
-
-#: .\orders\templates\orders\order_detail.html:8
-#: .\orders\templates\orders\purchase_confirmation.html:7
-msgid "Total:"
-msgstr ""
 
 #: .\orders\templates\orders\order_detail.html:13
 #: .\orders\templates\orders\purchase_confirmation.html:12
@@ -1389,142 +1447,122 @@ msgstr "Add review for {{ product.name }}"
 msgid "Enviar Review"
 msgstr "Post review"
 
-#: .\products\templates\products\product_detail.html:9
-#: .\products\templates\products\product_list.html:43
+#: .\products\templates\products\product_detail.html:11
 msgid "Imagen no disponible"
 msgstr "Image not available"
 
-#: .\products\templates\products\product_detail.html:13
-#: .\products\templates\products\product_list.html:47
+#: .\products\templates\products\product_detail.html:18
+#: .\products\templates\products\product_list.html:37
 msgid "Calificación promedio:"
 msgstr "Average rating:"
 
-#: .\products\templates\products\product_detail.html:14
-msgid "Descripción:"
-msgstr "Description:"
-
-#: .\products\templates\products\product_detail.html:15
-#: .\products\templates\products\product_list.html:48
-msgid "Precio:"
-msgstr "Price:"
-
-#: .\products\templates\products\product_detail.html:16
-msgid "Categoría:"
-msgstr "Category:"
+#: .\products\templates\products\product_detail.html:18
+#| msgid "Reseñas:"
+msgid "reseñas"
+msgstr "Reviews"
 
 #: .\products\templates\products\product_detail.html:20
+msgid "Resumen generado con IA: "
+msgstr "AI generated summary: "
+
+#: .\products\templates\products\product_detail.html:31
 msgid "Cantidad:"
 msgstr "Quantity:"
 
-#: .\products\templates\products\product_detail.html:22
+#: .\products\templates\products\product_detail.html:34
 msgid "Añadir al carrito"
 msgstr "Add to cart"
 
-#: .\products\templates\products\product_detail.html:24
+#: .\products\templates\products\product_detail.html:36
 msgid "Ver Carrito"
 msgstr "See Cart"
 
-#: .\products\templates\products\product_detail.html:26
+#: .\products\templates\products\product_detail.html:38
 msgid "Reseñas:"
 msgstr "Reviews"
 
-#: .\products\templates\products\product_detail.html:32
+#: .\products\templates\products\product_detail.html:44
 msgid "Rating:"
 msgstr "Rating:"
 
-#: .\products\templates\products\product_detail.html:38
+#: .\products\templates\products\product_detail.html:50
 msgid "No hay reseñas aún."
 msgstr "There are no reviews yet"
 
-#: .\products\templates\products\product_detail.html:42
+#: .\products\templates\products\product_detail.html:54
 msgid "Agregar Review"
 msgstr "Add review"
 
-#: .\products\templates\products\product_detail.html:44
-#: .\users\templates\users\basic_register.html:72
+#: .\products\templates\products\product_detail.html:56
+#: .\users\templates\users\basic_register.html:81
 #: .\users\templates\users\full_register.html:22
-msgid "Iniciar sesión"
+#, fuzzy
+#| msgid "Iniciar sesión"
+msgid "Inicia sesión"
 msgstr "Log in"
 
-#: .\products\templates\products\product_detail.html:44
+#: .\products\templates\products\product_detail.html:56
 msgid "para agregar una reseña."
 msgstr "to add a review."
 
-#: .\products\templates\products\product_detail.html:47
+#: .\products\templates\products\product_detail.html:59
 msgid "Fecha de agregado:"
 msgstr "Added date:"
 
-#: .\products\templates\products\product_detail.html:48
+#: .\products\templates\products\product_detail.html:60
 msgid "Volver"
 msgstr "Back"
 
-#: .\products\templates\products\product_list.html:9
-#, fuzzy
-#| msgid "Bienvenido, Administrador"
-msgid "¡Bienvenido, administrador"
-msgstr "Welcome, admin"
-
-#: .\products\templates\products\product_list.html:11
-msgid "¡Hola, "
-msgstr ""
-
-#: .\products\templates\products\product_list.html:14
+#: .\products\templates\products\product_list.html:13
 msgid "¡Bienvenido a nuestra tienda!"
 msgstr "Welcome to our store!"
 
-#: .\products\templates\products\product_list.html:20
-msgid "Ordenar por mejor calificación"
-msgstr "Order by best rating"
+#: .\products\templates\products\product_list.html:17
+#| msgid "Filtrar por categoría"
+msgid "Filtrar por categoría:"
+msgstr "Filter by category:"
 
-#: .\products\templates\products\product_list.html:24
-msgid "Filtrar por categoría"
-msgstr "Filter by category"
-
-#: .\products\templates\products\product_list.html:26
+#: .\products\templates\products\product_list.html:19
 msgid "Todas"
 msgstr "All"
 
-#: .\products\templates\products\product_list.html:32
+#: .\products\templates\products\product_list.html:25
 msgid "No hay categorías disponibles"
 msgstr "There are no categories available"
 
-#: .\products\templates\products\product_list.html:49
+#: .\products\templates\products\product_list.html:38
+msgid "Precio:"
+msgstr "Price:"
+
+#: .\products\templates\products\product_list.html:39
 msgid "Ver detalles"
 msgstr "See details"
 
-#: .\products\templates\products\product_list.html:53
+#: .\products\templates\products\product_list.html:42
 msgid "Stock disponible:"
 msgstr "Available stock:"
 
-#: .\products\templates\products\product_list.html:63
-msgid "No hay productos disponibles."
-msgstr "There are no products available."
-
-#: .\templates\base.html:17
+#: .\templates\base.html:20
 msgid "ArteNativo"
 msgstr ""
 
-#: .\templates\base.html:24
-msgid "Inicio"
-msgstr "Home"
-
-#: .\templates\base.html:28
+#: .\templates\base.html:36
 msgid "Carrito"
 msgstr "Cart"
 
-#: .\templates\base.html:31
+#: .\templates\base.html:40
 msgid "Dashboard"
 msgstr "Panel"
 
-#: .\templates\base.html:34
+#: .\templates\base.html:43
 msgid "Cerrar Sesión"
 msgstr "Log out"
 
-#: .\templates\base.html:43
+#: .\templates\base.html:52
 msgid "Iniciar Sesión"
 msgstr "log in"
 
-#: .\templates\base.html:70
+#: .\templates\base.html:68
 msgid "Todos los derechos reservados."
 msgstr "All rights reserved"
 
@@ -1553,51 +1591,57 @@ msgstr "Product list"
 msgid "Agregar producto"
 msgstr "Add Product"
 
-#: .\users\templates\users\basic_register.html:11
+#: .\users\templates\users\basic_register.html:20
 msgid "Registro"
 msgstr "Register"
 
-#: .\users\templates\users\basic_register.html:22
+#: .\users\templates\users\basic_register.html:31
 msgid "Nombre de usuario"
 msgstr "Username"
 
-#: .\users\templates\users\basic_register.html:25
-msgid "Ingrese su nombre de usuario"
+#: .\users\templates\users\basic_register.html:34
+#, fuzzy
+#| msgid "Ingrese su nombre de usuario"
+msgid " Ingrese su nombre de usuario"
 msgstr "Enter your username"
 
-#: .\users\templates\users\basic_register.html:34
+#: .\users\templates\users\basic_register.html:43
 msgid "Correo electrónico"
 msgstr "Email"
 
-#: .\users\templates\users\basic_register.html:37
-msgid "Ingrese su correo electrónico"
+#: .\users\templates\users\basic_register.html:46
+#, fuzzy
+#| msgid "Ingrese su correo electrónico"
+msgid " Ingrese su correo electrónico"
 msgstr "Enter your Email"
 
-#: .\users\templates\users\basic_register.html:47
+#: .\users\templates\users\basic_register.html:56
 #: .\users\templates\users\login.html:43
 msgid "Contraseña"
 msgstr "Password"
 
-#: .\users\templates\users\basic_register.html:49
-msgid "Ingrese la contraseña"
+#: .\users\templates\users\basic_register.html:58
+#, fuzzy
+#| msgid "Ingrese la contraseña"
+msgid " Ingrese la contraseña"
 msgstr "Enter your password"
 
-#: .\users\templates\users\basic_register.html:59
+#: .\users\templates\users\basic_register.html:68
 msgid "Confirmar contraseña"
 msgstr "Confirm password"
 
-#: .\users\templates\users\basic_register.html:61
+#: .\users\templates\users\basic_register.html:70
 #, fuzzy
 #| msgid " Confirme la contraseña"
 msgid "Confirme la contraseña"
 msgstr "Confirm your password"
 
-#: .\users\templates\users\basic_register.html:70
+#: .\users\templates\users\basic_register.html:79
 #: .\users\templates\users\full_register.html:18
 msgid "Registrarse"
 msgstr "Register"
 
-#: .\users\templates\users\basic_register.html:72
+#: .\users\templates\users\basic_register.html:81
 #: .\users\templates\users\full_register.html:22
 msgid "¿Ya tienes cuenta?"
 msgstr "Already have an account?"
@@ -1631,16 +1675,27 @@ msgstr "Do you wish to do a basic register?"
 msgid "Login"
 msgstr "Log in"
 
+#: .\users\templates\users\login.html:21
+msgid "Iniciar sesión"
+msgstr "Log in"
 
 #: .\users\templates\users\login.html:31
 msgid "Usuario"
 msgstr "User"
 
+#: .\users\templates\users\login.html:34
+msgid "Ingrese su nombre de usuario"
+msgstr "Enter your username"
 
+#: .\users\templates\users\login.html:45
+#, fuzzy
+#| msgid "Ingrese la contraseña"
+msgid "Ingrese la Contraseña"
+msgstr "Enter your password"
 
 #: .\users\templates\users\login.html:55
 msgid "Ingresar"
-msgstr ""
+msgstr "Enter"
 
 #: .\users\templates\users\login.html:57
 msgid "¿No tienes cuenta?"
@@ -1657,6 +1712,18 @@ msgstr "here"
 #: .\users\views.py:17
 msgid "Credenciales incorrectas"
 msgstr "Incorrect credentials"
+
+#~ msgid "Descripción:"
+#~ msgstr "Description:"
+
+#~ msgid "Categoría:"
+#~ msgstr "Category:"
+
+#~ msgid "Ordenar por mejor calificación"
+#~ msgstr "Order by best rating"
+
+#~ msgid "Inicio"
+#~ msgstr "Home"
 
 #, fuzzy
 #~| msgid "{quantity} x {product_name}"

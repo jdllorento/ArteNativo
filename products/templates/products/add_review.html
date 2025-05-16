@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load i18n %}
 {% block content %}
 <div class="container mt-4">
-    <h2>{% trans "Agregar Review para {{ product.name }}" %}</h2>
+    <h2>{% trans "Agregar Review para " %}{{ product.name }}</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}

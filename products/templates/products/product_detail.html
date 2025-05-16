@@ -17,7 +17,7 @@
             <h1 class="fw-bold">{{ product.name }}</h1>
             <p class="text-secondary">{% trans "Calificación promedio:" %} {{ product.average_rating|default:0|floatformat:1 }} ⭐ ({{ reviews|length }} {% trans "reseñas" %})</p>
             {% if review_overview %}
-            <p class="text-secondary"><strong>Resumen generado con IA: </strong>{{ review_overview|linebreaksbr }}</p>
+            <p class="text-secondary"><strong>{% trans "Resumen generado con IA: " %}</strong>{{ review_overview|linebreaksbr }}</p>
             {% endif %}
 
             <h3 class="text-danger fw-bold">${{ product.price }}</h3>

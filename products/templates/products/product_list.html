@@ -34,12 +34,12 @@
                 <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.name }}" style="max-height: 200px; object-fit: cover;">
                 <div class="card-body">
                     <h5 class="card-title">{{ product.name }}</h5>
-                    <p>Calificación promedio: {{ product.average_rating|default:0|floatformat:1 }} ⭐</p>
-                    <p class="card-text"><strong>Precio:</strong> ${{ product.price }}</p>
-                    <a href="{% url 'product_detail' product.id %}" class="btn btn-success">Ver detalles</a>
+                    <p>{% trans "Calificación promedio:" %} {{ product.average_rating|default:0|floatformat:1 }} ⭐</p>
+                    <p class="card-text"><strong>{% trans "Precio:" %}</strong> ${{ product.price }}</p>
+                    <a href="{% url 'product_detail' product.id %}" class="btn btn-success">{% trans "Ver detalles" %}</a>
                     {% if user.is_authenticated and user.is_staff %}
                         <p>
-                            Stock disponible: 
+                            {% trans "Stock disponible:" %}
                                 <span style="color: {% if product.stock <= 5 %}red{% else %}black{% endif %}; font-weight: bold;">
                                     {{ product.stock }}
                                 </span>
