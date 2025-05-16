@@ -1,25 +1,24 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
 <div class="container mt-5">
     <h2>
         {% if user.is_authenticated %}
             {% if user.is_staff %}
-                ¡Bienvenido, administrador" {{ user.username }}! 👑
+                {% trans "¡Bienvenido, administrador" %} {{ user.username }}! 👑
             {% else %}
-                ¡Hola, {{ user.username }}!
+                {% trans "¡Hola, " %} {{ user.username }}!
             {% endif %}
         {% else %}
-            ¡Bienvenido a los productos de nuestra tienda aliada! 🛍️
+            {% trans "¡Bienvenido a los productos de nuestra tienda aliada!" %} 🛍️
         {% endif %}
+    </h2>
 
+    <div class="row row-cols-1 row-cols-md-4 g-4">
         {% for product in products %}
-        <div class="col-md-4 mb-4">
-            <div class="card" style="width: 14rem;">
-            {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
-                {% else %}
-                    <img src="/media/products/default.jpg" alt="Imagen no disponible" class="product-image">
-                {% endif %}
+        <div class="col">
+            <div class="card h-100">
+                <img src="{{ product.image }}" class="img-fluid" alt="{{ product.name }}" style="max-height: 200px; object-fit: cover;">
                 <div class="card-body">
                     <h5 class="card-title">{{ product.name }}</h5>
                     <p class="card-text"><strong>Precio: </strong> ${{ product.price }}</p>
@@ -30,7 +29,7 @@
             </div>
         </div>
         {% empty %}
-        <p>No hay productos disponibles. </p>
+        <p>{% trans "No hay productos disponibles." %}</p>
         {% endfor %}
     </div>
 </div>

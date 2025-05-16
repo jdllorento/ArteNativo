@@ -10,7 +10,7 @@ import google.generativeai as genai
 from .datasources import DatabaseProductDataSource, HardcodedProductDataSource, IProductDataSource
 # Create your views here.
 
-genai.configure(api_key="AquiIriaelApi")
+genai.configure(api_key="aquivalaapikey")
 model = genai.GenerativeModel('gemini-2.0-flash')
 
 

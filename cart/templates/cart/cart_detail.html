@@ -31,14 +31,8 @@
                                             <span>{{ item.product.name }}</span>
                                         </div>
                                     </td>
-                                    <td class="text-center">
-                                        <form method="POST" action="{% url 'update_cart' item.product.id %}">
-                                            {% csrf_token %}
-                                            <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="{{ item.product.stock }}" class="form-control w-50 mx-auto text-center">
-                                            <button type="submit" class="btn btn-sm btn-outline-primary mt-2">{% trans "Actualizar" %}</button>
-                                        </form>
-                                    </td>
-                                    <td class="text-center">${{ item.product.price }}</td>
+                                    <td class="text-center">{{ item.quantity }}</td>
+                                    <td class="text-center">{{ item.product.price }}</td>
                                     <td class="text-center"><strong>${{ item.total_price }}</strong></td>
                                     <td class="text-center">
                                         <a href="{% url 'remove_from_cart' item.product.id %}" class="btn btn-sm btn-danger">{% trans "Eliminar" %}</a>
@@ -62,9 +56,8 @@
                 </div>
                 <div class="card-body">
                     <p><strong>{% trans "Subtotal:" %}</strong> ${{ cart.total_price }}</p>
-                    <p><strong>{% trans "Envío:" %}</strong> ${{ shipping_cost }}</p>
                     <hr>
-                    <h5><strong>{% trans "Total:" %}</strong> ${{ cart.total_price|add:shipping_cost }}</h5>
+                    <h5><strong>{% trans "Total:" %}</strong> ${{ cart.total_price }}</h5>
                     <a href="{% url 'checkout' %}" class="btn btn-primary w-100 mt-3">{% trans "Continuar compra" %}</a>
                 </div>
             </div>

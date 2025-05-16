@@ -1,4 +1,4 @@
-{% extends 'products/base.html' %}
+{% extends 'base.html' %}
 {% load i18n %}
 {% block content %}
 <div class="container mt-5">
@@ -20,11 +20,7 @@
             <p class="text-secondary"><strong>Resumen generado con IA: </strong>{{ review_overview|linebreaksbr }}</p>
             {% endif %}
 
-            <h2 class="text-success fw-bold">{% trans "Oferta del día" %}</h2>
-            <p class="text-decoration-line-through text-muted">${{ product.original_price }}</p>
             <h3 class="text-danger fw-bold">${{ product.price }}</h3>
-            <p class="text-success">{% trans "En 12 cuotas de" %} ${{ product.price|divisibleby:12 }} {% trans "con 0% interés" %}</p>
-            <a href="#" class="text-primary">{% trans "Ver los medios de pago" %}</a>
 
             <hr>
 
@@ -66,27 +62,5 @@
     </div>
 
     <hr class="my-5">
-
-    <!-- Sección de reseñas -->
-    <h3>{% trans "Reseñas:" %}</h3>
-    {% if reviews %}
-        {% for review in reviews %}
-            <div class="card my-3">
-                <div class="card-body">
-                    <h5 class="card-title">{{ review.user.username }}</h5>
-                    <p class="card-text">{% trans "Rating:" %} {{ review.rating }} ⭐</p>
-                    <p class="card-text">{{ review.comment }}</p>
-                </div>
-            </div>
-        {% endfor %}
-    {% else %}
-        <p>{% trans "No hay reseñas aún." %}</p>
-    {% endif %}
-
-    {% if user.is_authenticated %}
-        <a href="{% url 'add_review' product.id %}" class="btn btn-primary">{% trans "Agregar Review" %}</a>
-    {% else %}
-        <p><a href="{% url 'login' %}">{% trans "Inicia sesión" %}</a> {% trans "para agregar una reseña." %}</p>
-    {% endif %}
 </div>
 {% endblock %}
