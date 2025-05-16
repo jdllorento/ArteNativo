@@ -1,21 +1,25 @@
-{% extends 'users/base.html' %}
+{% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Admin Panel</title>
-    </head>
-    <body>
-        <h2>Bienvenido, Administrador</h2>
-        <p>Acceso a herramientas de gestión.</p>
-        <a href="{% url 'logout' %}" class = "btn btn-secondary">Cerrar sesión</a>
-        <a href="{% url 'product_list' %}" class = "btn btn-secondary">Lista de productos</a>
-        <a href="{% url 'add_product' %}" class = "btn btn-secondary">Agregar producto</a>
-    </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "Admin Panel" %}</title>
+</head>
+
+<body>
+    <h2>{% trans "Bienvenido, Administrador" %}</h2>
+    <p>{% trans "Acceso a herramientas de gestión." %}</p>
+    <a href="{% url 'logout' %}" class="btn btn-secondary">{% trans "Cerrar sesión" %}</a>
+    <a href="{% url 'product_list' %}" class="btn btn-secondary">{% trans "Lista de productos" %}</a>
+    <a href="{% url 'add_product' %}" class="btn btn-secondary">{% trans "Agregar producto" %}</a>
+</body>
+
 </html>
 
 {% endblock %}

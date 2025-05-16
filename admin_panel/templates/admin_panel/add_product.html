@@ -1,13 +1,13 @@
-{% extends 'admin_panel/base.html' %}
-
+{% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
 <div class="container mt-4">
-    <h2>Agregar Producto</h2>
+    <h2>{% trans "Agregar Producto" %}</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-primary">{% trans "Guardar" %}</button>
     </form>
-    <a href="{% url 'product_list' %}" class="btn btn-primary">Cancelar</a>
+    <a href="{% url 'product_list' %}" class="btn btn-primary">{% trans "Cancelar" %}</a>
 </div>
 {% endblock %}

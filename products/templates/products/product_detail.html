@@ -15,8 +15,6 @@
         <!-- Columna de los detalles del producto -->
         <div class="col-md-6">
             <h1 class="fw-bold">{{ product.name }}</h1>
-            <p class="text-muted">{% trans "Nuevo | +100 vendidos" %}</p>
-            <p class="text-warning fw-bold">{% trans "Más vendido" %}</p>
             <p class="text-secondary">{% trans "Calificación promedio:" %} {{ product.average_rating|default:0|floatformat:1 }} ⭐ ({{ reviews|length }} {% trans "reseñas" %})</p>
 
             <h2 class="text-success fw-bold">{% trans "Oferta del día" %}</h2>
@@ -24,25 +22,6 @@
             <h3 class="text-danger fw-bold">${{ product.price }}</h3>
             <p class="text-success">{% trans "En 12 cuotas de" %} ${{ product.price|divisibleby:12 }} {% trans "con 0% interés" %}</p>
             <a href="#" class="text-primary">{% trans "Ver los medios de pago" %}</a>
-
-            <hr>
-
-            <!-- Opciones del producto -->
-            <p><strong>{% trans "Color:" %}</strong> {{ product.color }}</p>
-            <div class="d-flex">
-                {% for color_option in product.color_options %}
-                    <div class="me-2">
-                        <img src="{{ color_option.image.url }}" alt="{{ color_option.name }}" class="img-thumbnail" style="width: 50px; height: 50px;">
-                    </div>
-                {% endfor %}
-            </div>
-
-            <p class="mt-3"><strong>{% trans "Memoria interna:" %}</strong> {{ product.memory }}</p>
-            <div class="d-flex">
-                {% for memory_option in product.memory_options %}
-                    <button class="btn btn-outline-secondary me-2">{{ memory_option }}</button>
-                {% endfor %}
-            </div>
 
             <hr>
 
@@ -56,6 +35,30 @@
                 <button type="submit" class="btn btn-primary btn-lg w-100 mb-2">{% trans "Añadir al carrito" %}</button>
             </form>
             <a href="{% url 'cart_detail' %}" class="btn btn-outline-secondary btn-lg w-100">{% trans "Ver Carrito" %}</a>
+
+            <h3>{% trans "Reseñas:" %}</h3>
+            {% if reviews %}
+            {% for review in reviews %}
+            <div class="card my-2">
+                <div class="card-body">
+                    <h5 class="card-title">{{ review.user.username }}</h5>
+                    <p class="card-text">{% trans "Rating:" %} {{ review.rating }} ⭐</p>
+                    <p class="card-text">{{ review.comment }}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>{% trans "No hay reseñas aún." %}</p>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            <a href="{% url 'add_review' product.id %}" class="btn btn-primary">{% trans "Agregar Review" %}</a>
+            {% else %}
+            <p><a href="{% url 'login' %}">{% trans "Inicia sesión" %}</a> {% trans "para agregar una reseña." %}</p>
+            {% endif %}
+
+            <p><strong>{% trans "Fecha de agregado:" %}</strong> {{ product.date_added }}</p>
+            <a href="{% url 'product_list' %}" class="btn btn-secondary">{% trans "Volver" %}</a>
         </div>
     </div>
 

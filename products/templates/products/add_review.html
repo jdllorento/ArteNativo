@@ -2,11 +2,11 @@
 {% load static %}
 {% block content %}
 <div class="container mt-4">
-    <h2>Agregar Review para {{ product.name }}</h2>
+    <h2>{% trans "Agregar Review para {{ product.name }}" %}</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Enviar Review</button>
+        <button type="submit" class="btn btn-primary">{% trans "Enviar Review" %}</button>
     </form>
 </div>
 {% endblock %}

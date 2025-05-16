@@ -5,9 +5,9 @@
     <h2>
         {% if user.is_authenticated %}
             {% if user.is_staff %}
-                ¡Bienvenido, administrador {{ user.username }}! 👑
+                {% trans "¡Bienvenido, administrador" %} {{ user.username }}! 👑
             {% else %}
-                ¡Hola, {{ user.username }}!
+                {% trans "¡Hola, " %} {{ user.username }}!
             {% endif %}
         {% else %}
             ¡Bienvenido a ArteNativo! 🛍️
