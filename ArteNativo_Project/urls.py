@@ -28,7 +28,8 @@ urlpatterns = [
     path('products/', include('products.urls')),
     path('add_product/', include('admin_panel.urls')),
     path('cart/', include('cart.urls')),
-    path('checkout/', include('orders.urls'))
+    path('checkout/', include('orders.urls')),
+    path('productos-aliados/', include('alied_products.urls'))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
