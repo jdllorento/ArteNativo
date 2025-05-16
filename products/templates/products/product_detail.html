@@ -1,65 +1,86 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'products/base.html' %}
+{% load i18n %}
 {% block content %}
-    <div class="container-fluid mt-5">
-        <div class="card">
-            <div class="d-flex align-items-center justify-content-center">
-        {% if product.image %}
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid img-thumbnail">
-        {% else %}
-            <img src="/media/products/default.jpg" alt="Imagen no disponible" class="img-fluid img-thumbnail">
-        {% endif %}
+<div class="container mt-5">
+    <div class="row">
+        <!-- Columna de la imagen -->
+        <div class="col-md-6 d-flex justify-content-center align-items-center">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid img-thumbnail">
+            {% else %}
+                <img src="/media/products/default.jpg" alt="{% trans 'Imagen no disponible' %}" class="img-fluid img-thumbnail">
+            {% endif %}
+        </div>
+
+        <!-- Columna de los detalles del producto -->
+        <div class="col-md-6">
+            <h1 class="fw-bold">{{ product.name }}</h1>
+            <p class="text-muted">{% trans "Nuevo | +100 vendidos" %}</p>
+            <p class="text-warning fw-bold">{% trans "Más vendido" %}</p>
+            <p class="text-secondary">{% trans "Calificación promedio:" %} {{ product.average_rating|default:0|floatformat:1 }} ⭐ ({{ reviews|length }} {% trans "reseñas" %})</p>
+
+            <h2 class="text-success fw-bold">{% trans "Oferta del día" %}</h2>
+            <p class="text-decoration-line-through text-muted">${{ product.original_price }}</p>
+            <h3 class="text-danger fw-bold">${{ product.price }}</h3>
+            <p class="text-success">{% trans "En 12 cuotas de" %} ${{ product.price|divisibleby:12 }} {% trans "con 0% interés" %}</p>
+            <a href="#" class="text-primary">{% trans "Ver los medios de pago" %}</a>
+
+            <hr>
+
+            <!-- Opciones del producto -->
+            <p><strong>{% trans "Color:" %}</strong> {{ product.color }}</p>
+            <div class="d-flex">
+                {% for color_option in product.color_options %}
+                    <div class="me-2">
+                        <img src="{{ color_option.image.url }}" alt="{{ color_option.name }}" class="img-thumbnail" style="width: 50px; height: 50px;">
+                    </div>
+                {% endfor %}
             </div>
 
-        <div class="card-body">
-            <h2 class="card-title text-start fw-bold">{{ product.name }}</h2>
-            <p class="card-text">Calificación promedio: {{ product.average_rating|default:0|floatformat:1 }} ⭐</p>
-            <p class="card-text"><strong>Descripción:</strong> {{ product.description }}</p>
-            <p class="card-text"><strong>Precio:</strong> ${{ product.price }}</p>
-            <p class="card-text"><strong>Categoría:</strong> {{ product.category }}</p>
-            {% if review_overview %}
-            <p class="card-text"><strong>Resumen generado con IA: </strong>{{ review_overview|linebreaksbr }}</p>
-            {% endif %}
+            <p class="mt-3"><strong>{% trans "Memoria interna:" %}</strong> {{ product.memory }}</p>
+            <div class="d-flex">
+                {% for memory_option in product.memory_options %}
+                    <button class="btn btn-outline-secondary me-2">{{ memory_option }}</button>
+                {% endfor %}
+            </div>
 
-            <form method="POST" action="{% url 'add_to_cart' product.id %}" class="mb-3">
+            <hr>
+
+            <!-- Botones de acción -->
+            <form method="POST" action="{% url 'add_to_cart' product.id %}">
                 {% csrf_token %}
                 <div class="mb-3">
-                    <label for="quantity" class="form-label">Cantidad:</label>
-                    <input type="number" name="quantity" id="quantity" value="1" min="1" max="{{ product.stock }}" class="form-control">
+                    <label for="quantity" class="form-label">{% trans "Cantidad:" %}</label>
+                    <input type="number" name="quantity" id="quantity" value="1" min="1" max="{{ product.stock }}" class="form-control w-25">
                 </div>
-                <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-custom-button:hover custom-button text-center">Comprar ahora</button>
+                <button type="submit" class="btn btn-primary btn-lg w-100 mb-2">{% trans "Añadir al carrito" %}</button>
             </form>
-            <a href="{% url 'cart_detail' %}" class="btn btn-success text-center">Ver Carrito</a>
-            </div>
-                <div class="col-sm-6 mb-3 mb-sm-0">
-                <h3 class="card-title text-start fw-bold">Reseñas.</h3>
-                {% if reviews %}
-                    {% for review in reviews %}
-                        <div class="card my-2">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ review.user.username }}</h5>
-                                <p class="card-text">Rating: {{ review.rating }} ⭐</p>
-                                <p class="card-text">{{ review.comment }}</p>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <p class="card-text text-secondary">No hay reseñas aún.</p>
-                {% endif %}
-
-                {% if user.is_authenticated %}
-                    <a href="{% url 'add_review' product.id %}" class="btn btn-primary">Agregar Review</a>
-                {% else %}
-                    <p>¿Quisieras añadir alguna reseña?<p>👉<a href="{% url 'login' %}">¡ingresa aquí!</a>👈</p>
-                {% endif %}
-
-                <p><strong>Fecha de agregado:</strong> {{ product.date_added }}</p>
-            </div>
-            <div class="d-grid gap-2">
-            <a href="{% url 'product_list' %}" class="btn btn-custom-button:hover custom-button text-center">Volver</a>
-            </div>
-            </div>
+            <a href="{% url 'cart_detail' %}" class="btn btn-outline-secondary btn-lg w-100">{% trans "Ver Carrito" %}</a>
         </div>
     </div>
+
+    <hr class="my-5">
+
+    <!-- Sección de reseñas -->
+    <h3>{% trans "Reseñas:" %}</h3>
+    {% if reviews %}
+        {% for review in reviews %}
+            <div class="card my-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ review.user.username }}</h5>
+                    <p class="card-text">{% trans "Rating:" %} {{ review.rating }} ⭐</p>
+                    <p class="card-text">{{ review.comment }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>{% trans "No hay reseñas aún." %}</p>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'add_review' product.id %}" class="btn btn-primary">{% trans "Agregar Review" %}</a>
+    {% else %}
+        <p><a href="{% url 'login' %}">{% trans "Inicia sesión" %}</a> {% trans "para agregar una reseña." %}</p>
+    {% endif %}
+</div>
 {% endblock %}

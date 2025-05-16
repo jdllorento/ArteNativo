@@ -1,17 +1,19 @@
+{% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}ArteNativo{% endblock %}</title>
-    {% load static %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 
     <!-- Navbar -->
-    <nav class="user-container navbar-expand-lg navbar-dark">
+    <nav class="user-container navbar navbar-expand-lg user-container">
         <div class="container-fluid">
             <div class="d-flex align-items-center">
                 <img class="naybar-logo me-2" src="/media/img/logotipoArteNativo.png" alt="logotipoArteNativo" style="height: 40px;">
@@ -22,12 +24,17 @@
             </div>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class= "btn btn-success text-center" href="{% url 'product_list' %}">Inicio</a>
-                    </li>
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'cart_detail' %}">Carrito</a>
+                            <a class="nav-link position-relative" href="{% url 'cart_detail' %}">
+                                <i class="fas fa-shopping-cart"></i>
+                                {% if cart.items.count > 0 %}
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ cart.items.count }}
+                                    </span>
+                                {% endif %}
+                                {% trans "Carrito" %}
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
@@ -41,7 +48,6 @@
                             </li>
                         {% endif %}
                     {% else %}
-                        <br />
                         <li class="nav-item">
                             <a class="btn btn-success text-center" href="{% url 'login' %}">Iniciar Sesión</a>
                         </li>
@@ -57,19 +63,8 @@
         {% endblock %}
     </div>
 
-    <div class="container mt-3">
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            {% endfor %}
-        {% endif %}
-    </div>
-
     <!-- Footer -->
-    <footer class="user-container text-light text-center py-3 mt-4">
+    <footer class="user-container text-light text-center py-3 mt-4 bg-dark">
         <p>&copy; 2025 ArteNativo. Todos los derechos reservados.</p>
     </footer>
 
