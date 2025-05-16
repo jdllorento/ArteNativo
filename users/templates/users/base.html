@@ -20,9 +20,6 @@
             </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="btn btn-custom-button:hover custom-button text-center" href="{% url 'product_list' %}">Inicio</a>
-                        </li>
                         {% if user.is_authenticated %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'cart_detail' %}">Carrito</a>

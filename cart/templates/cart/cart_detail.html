@@ -1,18 +1,74 @@
-{% extends 'cart/base.html' %}
-
+{% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
-<h2>Carrito de Compras</h2>
-<ul>
-    {% for item in cart.items.all %}
-        <li>
-            {{ item.product.name }} - {{ item.quantity }} x ${{ item.product.price }}
-            = <strong>${{ item.total_price }}</strong>
-            <a href="{% url 'remove_from_cart' item.product.id %}">Eliminar</a>
-        </li>
-    {% empty %}
-        <p>Tu carrito está vacío.</p>
-    {% endfor %}
-</ul>
-<p><strong>Subtotal:</strong> ${{ cart.total_price }}</p>
-<a class="btn-btn primary" href="{% url 'checkout' %}">Pagar</a>
+<div class="container mt-5">
+    <h2 class="mb-4">{% trans "Carrito de Compras" %}</h2>
+    <div class="row">
+        <!-- Sección de productos en el carrito -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">{% trans "Productos en tu carrito" %}</h5>
+                </div>
+                <div class="card-body">
+                    {% if cart.items.all %}
+                        <table class="table table-bordered align-middle">
+                            <thead>
+                                <tr>
+                                    <th>{% trans "Producto" %}</th>
+                                    <th class="text-center">{% trans "Cantidad" %}</th>
+                                    <th class="text-center">{% trans "Precio Unitario" %}</th>
+                                    <th class="text-center">{% trans "Subtotal" %}</th>
+                                    <th class="text-center">{% trans "Acciones" %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in cart.items.all %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-thumbnail me-3" style="width: 80px; height: 80px; object-fit: cover;">
+                                            <span>{{ item.product.name }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <form method="POST" action="{% url 'update_cart' item.product.id %}">
+                                            {% csrf_token %}
+                                            <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="{{ item.product.stock }}" class="form-control w-50 mx-auto text-center">
+                                            <button type="submit" class="btn btn-sm btn-outline-primary mt-2">{% trans "Actualizar" %}</button>
+                                        </form>
+                                    </td>
+                                    <td class="text-center">${{ item.product.price }}</td>
+                                    <td class="text-center"><strong>${{ item.total_price }}</strong></td>
+                                    <td class="text-center">
+                                        <a href="{% url 'remove_from_cart' item.product.id %}" class="btn btn-sm btn-danger">{% trans "Eliminar" %}</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p class="text-center">{% trans "Tu carrito está vacío." %}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Resumen de compra -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">{% trans "Resumen de compra" %}</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>{% trans "Subtotal:" %}</strong> ${{ cart.total_price }}</p>
+                    <p><strong>{% trans "Envío:" %}</strong> ${{ shipping_cost }}</p>
+                    <hr>
+                    <h5><strong>{% trans "Total:" %}</strong> ${{ cart.total_price|add:shipping_cost }}</h5>
+                    <a href="{% url 'checkout' %}" class="btn btn-primary w-100 mt-3">{% trans "Continuar compra" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
