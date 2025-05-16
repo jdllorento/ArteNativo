@@ -4,6 +4,8 @@ from .models import Product, Category
 from django.contrib.auth.decorators import login_required
 from .forms import ReviewForm
 from django.utils.translation import gettext_lazy as _
+from django.http import JsonResponse
+from .serializers import ProductsSerializer
 # Create your views here.
 
 
@@ -28,6 +30,13 @@ def product_detail(request, product_id):
     reviews = product.reviews.all()
     average_rating = Avg('reviews__rating')
     return render(request, 'products/product_detail.html', {'product': product, 'reviews': reviews, 'average_rating': average_rating})
+
+
+
+def serialize_products(request):
+    products = Product.objects.all()
+    serializer = ProductsSerializer(products, many=True)
+    return JsonResponse({'Products Avaible':serializer.data})
 
 
 @login_required
