@@ -11,7 +11,7 @@ import google.generativeai as genai
 from .datasources import DatabaseProductDataSource, HardcodedProductDataSource, IProductDataSource
 # Create your views here.
 
-genai.configure(api_key="AIzaSyCmL2nc7fshoheuAdErv5D0koJedvqv21k")
+genai.configure(api_key="aquivalaapikey")
 model = genai.GenerativeModel('gemini-2.0-flash')
 
 def product_list(request):
